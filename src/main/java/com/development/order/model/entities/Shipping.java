@@ -8,22 +8,46 @@ import com.development.order.model.entities.enums.Status;
 
 public class Shipping implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	private Integer id;
 	private String name;
 	private PackageProduct pckProduct;
 	private LocalDate dataPrevist;
+	private String localdeparture;
+	private String localDestinity;
 	private Status status;
 
 	public Shipping() {
 
 	}
 
-	public Shipping(Integer id, String name, PackageProduct pckProduct, LocalDate dataPrevist, Status status) {
+	public Shipping(Integer id, String name, PackageProduct pckProduct, LocalDate dataPrevist, String localdeparture,
+			String localDestinity, Status status) {
 		this.id = id;
 		this.name = name;
 		this.pckProduct = pckProduct;
 		this.dataPrevist = dataPrevist;
+		this.localdeparture = localdeparture;
+		this.localDestinity = localDestinity;
 		this.status = status;
+	}
+
+
+	public String getLocaldeparture() {
+		return localdeparture;
+	}
+
+	public String getLocalDestinity() {
+		return localDestinity;
+	}
+
+	public void setLocaldeparture(String localdeparture) {
+		this.localdeparture = localdeparture;
+	}
+
+	public void setLocalDestinity(String localDestinity) {
+		this.localDestinity = localDestinity;
 	}
 
 	public Integer getId() {

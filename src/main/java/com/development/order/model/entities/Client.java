@@ -13,18 +13,30 @@ public class Client implements Serializable{
 	private Integer cpf;
 	private Integer locality;
 	private Instant DataBuy;
+	private Product product;
 
 	
 	public Client() {
 		
 	}
 	
-	public Client(Integer id, String name, Integer cpf, Integer locality,Instant DataBuy) {
+	public Client(Integer id, String name, Integer cpf, Integer locality,Instant DataBuy,Product product) {
 		this.id = id;
 		this.name = name;
 		this.cpf = cpf;
 		this.locality = locality;
 		this.DataBuy = DataBuy;
+		this.product = product;
+	}
+
+	
+	
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public Integer getId() {

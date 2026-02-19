@@ -1,11 +1,16 @@
 package com.development.order.model.entities;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import com.development.order.model.entities.enums.Status;
 
-public class Seller {
-
+import jakarta.persistence.Entity;
+@Entity
+public class Seller implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	private Integer id;
 	private String name;
 	private Integer cnpj;

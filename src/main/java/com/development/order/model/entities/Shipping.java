@@ -6,6 +6,8 @@ import java.util.Objects;
 
 import com.development.order.model.entities.enums.Status;
 
+import jakarta.persistence.Entity;
+@Entity
 public class Shipping implements Serializable{
 
 	private static final long serialVersionUID = 1L;

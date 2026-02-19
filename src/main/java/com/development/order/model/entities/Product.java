@@ -1,7 +1,13 @@
 package com.development.order.model.entities;
 
-public class Product {
+import java.io.Serializable;
 
+import jakarta.persistence.Entity;
+@Entity
+public class Product implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	private String name;
 	private Double price;
 	private String type;

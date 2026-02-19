@@ -20,5 +20,14 @@ public enum Status {
 	public int getCode() {
 		return code;
 	}
+	
+	public static Status ValueCode(int code) {
+		for(Status s : Status.values()) {
+			if(s.getCode() == code) {
+				return s;
+			}
+		}
+		throw new  IllegalArgumentException("invalid code");
+	}
 
 }

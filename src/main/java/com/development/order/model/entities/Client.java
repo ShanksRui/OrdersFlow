@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+@Entity
 public class Client implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -29,8 +31,6 @@ public class Client implements Serializable{
 		this.product = product;
 	}
 
-	
-	
 	public Product getProduct() {
 		return product;
 	}

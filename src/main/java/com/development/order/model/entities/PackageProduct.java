@@ -3,6 +3,8 @@ package com.development.order.model.entities;
 import java.time.Instant;
 import java.util.Objects;
 
+import com.development.order.model.entities.enums.Status;
+
 public class PackageProduct {
 	
 	private Integer id;
@@ -11,19 +13,23 @@ public class PackageProduct {
 	private Integer sellerId;
 	private Integer clientID;
 	private Instant createdAt;
+	private Product product;
+	private Status status;
+
 	
 	public PackageProduct() {
 		
 	}
 	
 	public PackageProduct(Integer id, Double weitghtDeclared, Double weightValidated, Integer sellerId,
-			Integer clientID, Instant createdAt) {
+			Integer clientID, Instant createdAt, Product product) {
 		this.id = id;
 		this.weitghtDeclared = weitghtDeclared;
 		this.weightValidated = weightValidated;
 		this.sellerId = sellerId;
 		this.clientID = clientID;
 		this.createdAt = createdAt;
+		this.setProduct(product);
 	}
 
 	public Integer getId() {
@@ -73,6 +79,15 @@ public class PackageProduct {
 	public void setCreatedAt(Instant createdAt) {
 		this.createdAt = createdAt;
 	}
+	
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	
 
 	@Override
 	public int hashCode() {
@@ -90,6 +105,5 @@ public class PackageProduct {
 		PackageProduct other = (PackageProduct) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
+
 }

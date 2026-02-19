@@ -6,6 +6,7 @@ public class Product {
 	private Double price;
 	private String type;
 	private Seller seller;
+	
 
 
 	public Product () {

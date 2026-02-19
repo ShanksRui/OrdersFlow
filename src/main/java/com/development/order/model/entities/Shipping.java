@@ -1,26 +1,28 @@
 package com.development.order.model.entities;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 
 import com.development.order.model.entities.enums.Status;
 
-public class Seller {
+public class Shipping implements Serializable{
 
 	private Integer id;
 	private String name;
-	private Integer cnpj;
 	private PackageProduct pckProduct;
+	private LocalDate dataPrevist;
 	private Status status;
-	
-	public Seller() {
-		
+
+	public Shipping() {
+
 	}
 
-	public Seller(Integer id, String name, Integer cnpj, PackageProduct pckProduct,Status status) {
+	public Shipping(Integer id, String name, PackageProduct pckProduct, LocalDate dataPrevist, Status status) {
 		this.id = id;
 		this.name = name;
-		this.cnpj = cnpj;
 		this.pckProduct = pckProduct;
+		this.dataPrevist = dataPrevist;
 		this.status = status;
 	}
 
@@ -32,12 +34,16 @@ public class Seller {
 		return name;
 	}
 
-	public Integer getCnpj() {
-		return cnpj;
-	}
-
 	public PackageProduct getPckProduct() {
 		return pckProduct;
+	}
+
+	public LocalDate getDataPrevist() {
+		return dataPrevist;
+	}
+
+	public Status getStatus() {
+		return status;
 	}
 
 	public void setId(Integer id) {
@@ -48,12 +54,16 @@ public class Seller {
 		this.name = name;
 	}
 
-	public void setCnpj(Integer cnpj) {
-		this.cnpj = cnpj;
-	}
-
 	public void setPckProduct(PackageProduct pckProduct) {
 		this.pckProduct = pckProduct;
+	}
+
+	public void setDataPrevist(LocalDate dataPrevist) {
+		this.dataPrevist = dataPrevist;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 	@Override
@@ -69,7 +79,7 @@ public class Seller {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Seller other = (Seller) obj;
+		Shipping other = (Shipping) obj;
 		return Objects.equals(id, other.id);
 	}
 

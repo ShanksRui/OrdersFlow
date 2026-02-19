@@ -1,23 +1,30 @@
 package com.development.order.model.entities;
 
+import java.io.Serializable;
+import java.time.Instant;
 import java.util.Objects;
 
-public class Client {
-
+public class Client implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	private Integer id;
 	private String name;
 	private Integer cpf;
 	private Integer locality;
+	private Instant DataBuy;
+
 	
 	public Client() {
 		
 	}
 	
-	public Client(Integer id, String name, Integer cpf, Integer locality) {
+	public Client(Integer id, String name, Integer cpf, Integer locality,Instant DataBuy) {
 		this.id = id;
 		this.name = name;
 		this.cpf = cpf;
 		this.locality = locality;
+		this.DataBuy = DataBuy;
 	}
 
 	public Integer getId() {
@@ -50,6 +57,14 @@ public class Client {
 
 	public void setLocality(Integer locality) {
 		this.locality = locality;
+	}
+	
+	public Instant getDataBuy() {
+		return DataBuy;
+	}
+
+	public void setDataBuy(Instant dataBuy) {
+		DataBuy = dataBuy;
 	}
 
 	@Override

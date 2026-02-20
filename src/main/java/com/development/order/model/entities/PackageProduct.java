@@ -1,79 +1,56 @@
 package com.development.order.model.entities;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
-import com.development.order.model.entities.enums.Status;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
-public class PackageProduct {
+@Entity
+public class PackageProduct implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
+	@EmbeddedId
+	private PackageIds id;
 	
-	private Integer id;
-	private Double weitghtDeclared;
-	private Double weightValidated;
-	private Integer sellerId;
-	private Integer clientID;
 	private Instant createdAt;
+	@OneToOne
+	@JoinColumn(name = "product_id")
 	private Product product;
-	private Status status;
-
+	
+	private Double weightValidated;
+	
 	
 	public PackageProduct() {
 		
 	}
 	
-	public PackageProduct(Integer id, Double weitghtDeclared, Double weightValidated, Integer sellerId,
+	public PackageProduct(Double weitghtDeclared, Double weightValidated, Integer sellerId,
 			Integer clientID, Instant createdAt, Product product) {
-		this.id = id;
-		this.weitghtDeclared = weitghtDeclared;
 		this.weightValidated = weightValidated;
-		this.sellerId = sellerId;
-		this.clientID = clientID;
+		this.id.setSellerId(sellerId);
+		this.id.setClientId(clientID);
 		this.createdAt = createdAt;
-		this.setProduct(product);
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public Double getWeitghtDeclared() {
-		return weitghtDeclared;
+		this.product = product;
 	}
 
 	public Double getWeightValidated() {
 		return weightValidated;
 	}
 
-	public Integer getSellerId() {
-		return sellerId;
-	}
-
-	public Integer getClientID() {
-		return clientID;
-	}
-
 	public Instant getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
 	public void setWeitghtDeclared(Double weitghtDeclared) {
-		this.weitghtDeclared = weitghtDeclared;
 	}
 
 	public void setWeightValidated(Double weightValidated) {
 		this.weightValidated = weightValidated;
-	}
-
-	public void setSellerId(Integer sellerId) {
-		this.sellerId = sellerId;
-	}
-
-	public void setClientID(Integer clientID) {
-		this.clientID = clientID;
 	}
 
 	public void setCreatedAt(Instant createdAt) {
@@ -87,7 +64,6 @@ public class PackageProduct {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	
 
 	@Override
 	public int hashCode() {
@@ -105,5 +81,4 @@ public class PackageProduct {
 		PackageProduct other = (PackageProduct) obj;
 		return Objects.equals(id, other.id);
 	}
-
 }

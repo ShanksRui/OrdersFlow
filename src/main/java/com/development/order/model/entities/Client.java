@@ -5,11 +5,19 @@ import java.time.Instant;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 @Entity
-public class Client implements Serializable{
-	
+@Table(name = "db_Client")
+public class Client implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
 	private Integer cpf;
@@ -17,12 +25,11 @@ public class Client implements Serializable{
 	private Instant DataBuy;
 	private Product product;
 
-	
 	public Client() {
-		
+
 	}
-	
-	public Client(Integer id, String name, Integer cpf, Integer locality,Instant DataBuy,Product product) {
+
+	public Client(Integer id, String name, Integer cpf, Integer locality, Instant DataBuy, Product product) {
 		this.id = id;
 		this.name = name;
 		this.cpf = cpf;
@@ -70,7 +77,7 @@ public class Client implements Serializable{
 	public void setLocality(Integer locality) {
 		this.locality = locality;
 	}
-	
+
 	public Instant getDataBuy() {
 		return DataBuy;
 	}

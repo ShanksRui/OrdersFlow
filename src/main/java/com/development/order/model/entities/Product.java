@@ -3,19 +3,14 @@ package com.development.order.model.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-<<<<<<< HEAD
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
-=======
->>>>>>> 9d7c467 (correcoes do merge anterior,implementei novamente as annotations nas entities , criacao da PKcomposta e configurei o test.properties do h2)
 @Entity
 public class Product implements Serializable{
 	
@@ -23,11 +18,8 @@ public class Product implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-<<<<<<< HEAD
 	private Integer id;
 	
-=======
->>>>>>> 9d7c467 (correcoes do merge anterior,implementei novamente as annotations nas entities , criacao da PKcomposta e configurei o test.properties do h2)
 	private String name;
 	private Double price;
 	private String type;

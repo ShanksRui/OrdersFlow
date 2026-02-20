@@ -4,127 +4,100 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
-<<<<<<< HEAD
+import com.development.order.model.entities.pk.PackagePK;
+
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 
 @Entity
-public class PackageProduct implements Serializable{
+public class PackageProduct implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private PackageIds id;
-	
-=======
-import com.development.order.model.entities.enums.Status;
-import com.development.order.model.entities.pk.PackagePK;
+    private Double weightDeclared;
+    private Double weightValidated;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-@Entity
-public class PackageProduct implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
-	
-	private Double weitghtDeclared;
-	private Double weightValidated;
-	@EmbeddedId
-	private PackagePK id;
->>>>>>> 9d7c467 (correcoes do merge anterior,implementei novamente as annotations nas entities , criacao da PKcomposta e configurei o test.properties do h2)
-	private Instant createdAt;
-	@OneToOne
-	@JoinColumn(name = "product_id")
-	private Product product;
-	
-	private Double weightValidated;
-	
-	
-	public PackageProduct() {
-		
-	}
-	
-	public PackageProduct(Double weitghtDeclared, Double weightValidated, Integer sellerId,
-			Integer clientID, Instant createdAt, Product product) {
-<<<<<<< HEAD
-		this.weightValidated = weightValidated;
-		this.id.setSellerId(sellerId);
-		this.id.setClientId(clientID);
-		this.createdAt = createdAt;
-		this.product = product;
-=======
-		this.weitghtDeclared = weitghtDeclared;
-		this.weightValidated = weightValidated;
-		this.id.setClientId(clientID);
-		this.id.setSellerId(sellerId);
-		this.createdAt = createdAt;
-		this.setProduct(product);
-	}
+    @EmbeddedId
+    private PackagePK id = new PackagePK();
 
-	
-	public Double getWeitghtDeclared() {
-		return weitghtDeclared;
->>>>>>> 9d7c467 (correcoes do merge anterior,implementei novamente as annotations nas entities , criacao da PKcomposta e configurei o test.properties do h2)
-	}
+    private Instant createdAt;
 
-	public Double getWeightValidated() {
-		return weightValidated;
-	}
+    @OneToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
-<<<<<<< HEAD
-=======
+    public PackageProduct() {
+    }
 
->>>>>>> 9d7c467 (correcoes do merge anterior,implementei novamente as annotations nas entities , criacao da PKcomposta e configurei o test.properties do h2)
-	public Instant getCreatedAt() {
-		return createdAt;
-	}
+    public PackageProduct(Double weightDeclared,
+                          Double weightValidated,
+                          Integer sellerId,
+                          Integer clientId,
+                          Instant createdAt,
+                          Product product) {
 
-	public void setWeitghtDeclared(Double weitghtDeclared) {
-	}
+        this.weightDeclared = weightDeclared;
+        this.weightValidated = weightValidated;
+        this.id.setSellerId(sellerId);
+        this.id.setClientId(clientId);
+        this.createdAt = createdAt;
+        this.product = product;
+    }
 
-	public void setWeightValidated(Double weightValidated) {
-		this.weightValidated = weightValidated;
-	}
+    public Double getWeightDeclared() {
+        return weightDeclared;
+    }
 
-<<<<<<< HEAD
-=======
-	public void setSellerId(Integer sellerId) {
-		this.id.setSellerId(sellerId);
-	}
+    public void setWeightDeclared(Double weightDeclared) {
+        this.weightDeclared = weightDeclared;
+    }
 
-	public void setClientID(Integer clientID) {
-		this.id.setClientId(clientID);
-	}
+    public Double getWeightValidated() {
+        return weightValidated;
+    }
 
->>>>>>> 9d7c467 (correcoes do merge anterior,implementei novamente as annotations nas entities , criacao da PKcomposta e configurei o test.properties do h2)
-	public void setCreatedAt(Instant createdAt) {
-		this.createdAt = createdAt;
-	}
-	
-	public Product getProduct() {
-		return product;
-	}
+    public void setWeightValidated(Double weightValidated) {
+        this.weightValidated = weightValidated;
+    }
 
-	public void setProduct(Product product) {
-		this.product = product;
-	}
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		PackageProduct other = (PackageProduct) obj;
-		return Objects.equals(id, other.id);
-	}
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Integer getSellerId() {
+        return id.getSellerId();
+    }
+
+    public Integer getClientId() {
+        return id.getClientId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof PackageProduct))
+            return false;
+        PackageProduct other = (PackageProduct) obj;
+        return Objects.equals(id, other.id);
+    }
 }

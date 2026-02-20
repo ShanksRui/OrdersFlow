@@ -4,26 +4,18 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-<<<<<<< HEAD
 import jakarta.persistence.Table;
 
-=======
->>>>>>> 9d7c467 (correcoes do merge anterior,implementei novamente as annotations nas entities , criacao da PKcomposta e configurei o test.properties do h2)
 @Entity
 @Table(name = "db_Client")
 public class Client implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> 9d7c467 (correcoes do merge anterior,implementei novamente as annotations nas entities , criacao da PKcomposta e configurei o test.properties do h2)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;

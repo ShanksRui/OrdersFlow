@@ -1,103 +1,136 @@
 package com.development.order.model.entities;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.Objects;
 
-import com.development.order.model.entities.pk.PackagePK;
+import com.development.order.model.entities.enums.Status;
 
-import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
 @Entity
 public class PackageProduct implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    private Double weightDeclared;
-    private Double weightValidated;
+	private Double weightDeclared;
+	private Double weightValidated;
 
-    @EmbeddedId
-    private PackagePK id = new PackagePK();
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	@ManyToOne
+	@JoinColumn(name = "client_id")
+	private Client client;
+	@ManyToOne
+	@JoinColumn(name = "seller_id")
+	private Seller seller;
+	@ManyToOne
+	@JoinColumn(name = "product_id")
+	private Product product;
+	
+	private Status status;
 
-    private Instant createdAt;
+	public PackageProduct() {
+	}
 
-    @OneToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
+	public PackageProduct(Double weightDeclared, Double weightValidated, Integer id, Client client, Seller seller,
+			Product product, Status status) {
+		this.weightDeclared = weightDeclared;
+		this.weightValidated = weightValidated;
+		this.id = id;
+		this.client = client;
+		this.seller = seller;
+		this.product = product;
+		this.status = status;
+	}
+	
+	
 
-    public PackageProduct() {
-    }
+	public PackageProduct(Integer id, Client client, Seller seller, Product product, Status status) {
+		super();
+		this.id = id;
+		this.client = client;
+		this.seller = seller;
+		this.product = product;
+		this.status = status;
+	}
 
-    public PackageProduct(Double weightDeclared,
-                          Double weightValidated,
-                          Integer sellerId,
-                          Integer clientId,
-                          Instant createdAt,
-                          Product product) {
+	public Double getWeightDeclared() {
+		return weightDeclared;
+	}
 
-        this.weightDeclared = weightDeclared;
-        this.weightValidated = weightValidated;
-        this.id.setSellerId(sellerId);
-        this.id.setClientId(clientId);
-        this.createdAt = createdAt;
-        this.product = product;
-    }
+	public Double getWeightValidated() {
+		return weightValidated;
+	}
 
-    public Double getWeightDeclared() {
-        return weightDeclared;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public void setWeightDeclared(Double weightDeclared) {
-        this.weightDeclared = weightDeclared;
-    }
+	public Client getClient() {
+		return client;
+	}
 
-    public Double getWeightValidated() {
-        return weightValidated;
-    }
+	public Seller getSeller() {
+		return seller;
+	}
 
-    public void setWeightValidated(Double weightValidated) {
-        this.weightValidated = weightValidated;
-    }
+	public Product getProduct() {
+		return product;
+	}
 
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
+	public Status getStatus() {
+		return status;
+	}
 
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
-    }
+	public void setWeightDeclared(Double weightDeclared) {
+		this.weightDeclared = weightDeclared;
+	}
 
-    public Product getProduct() {
-        return product;
-    }
+	public void setWeightValidated(Double weightValidated) {
+		this.weightValidated = weightValidated;
+	}
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Integer getSellerId() {
-        return id.getSellerId();
-    }
+	public void setClient(Client client) {
+		this.client = client;
+	}
 
-    public Integer getClientId() {
-        return id.getClientId();
-    }
+	public void setSeller(Seller seller) {
+		this.seller = seller;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!(obj instanceof PackageProduct))
-            return false;
-        PackageProduct other = (PackageProduct) obj;
-        return Objects.equals(id, other.id);
-    }
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PackageProduct other = (PackageProduct) obj;
+		return Objects.equals(id, other.id);
+	}
 }

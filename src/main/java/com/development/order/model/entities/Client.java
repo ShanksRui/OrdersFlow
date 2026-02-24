@@ -2,12 +2,17 @@ package com.development.order.model.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -21,31 +26,26 @@ public class Client implements Serializable {
 	private Integer id;
 	private String name;
 	private Integer cpf;
-	private Integer locality;
+	private Integer cep;
 	private Instant DataBuy;
-	private Product product;
+	@OneToMany(mappedBy = "client")
+	private List<PackageProduct> pkgs = new ArrayList<>();
 
 	public Client() {
 
 	}
 
-	public Client(Integer id, String name, Integer cpf, Integer locality, Instant DataBuy, Product product) {
+	public Client(Integer id, String name, Integer cpf, Integer cep, Instant DataBuy) {
 		this.id = id;
 		this.name = name;
 		this.cpf = cpf;
-		this.locality = locality;
+		this.cep = cep;
 		this.DataBuy = DataBuy;
-		this.product = product;
 	}
 
-	public Product getProduct() {
-		return product;
+	public List<PackageProduct> getPkgs(){
+		return pkgs;
 	}
-
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -59,7 +59,7 @@ public class Client implements Serializable {
 	}
 
 	public Integer getLocality() {
-		return locality;
+		return cep;
 	}
 
 	public void setId(Integer id) {
@@ -74,8 +74,8 @@ public class Client implements Serializable {
 		this.cpf = cpf;
 	}
 
-	public void setLocality(Integer locality) {
-		this.locality = locality;
+	public void setLocality(Integer cep) {
+		this.cep = cep;
 	}
 
 	public Instant getDataBuy() {

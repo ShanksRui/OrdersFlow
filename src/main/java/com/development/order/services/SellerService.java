@@ -2,6 +2,7 @@ package com.development.order.services;
 
 import org.springframework.stereotype.Service;
 
+import com.development.order.model.entities.Seller;
 import com.development.order.repositories.SellerRepository;
 
 @Service
@@ -11,5 +12,12 @@ private SellerRepository repository;
 	
 	public SellerService(SellerRepository repository) {
 		this.repository = repository;
+	}
+	
+	public void insert(Seller seller) {
+		if(repository.existsById(seller.getId())) {
+			throw new IllegalArgumentException("already exitst ById in data Base");
+		}
+		repository.save(seller);
 	}
 }

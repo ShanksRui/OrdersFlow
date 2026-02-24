@@ -27,7 +27,7 @@ public class Product implements Serializable{
 	@JoinColumn(name = "seller_ID")
 	private Seller seller;
 	@OneToOne(mappedBy = "product")
-	private PackageProduct pckProduct;
+	private PackageProduct pkgProduct;
 	
 
 

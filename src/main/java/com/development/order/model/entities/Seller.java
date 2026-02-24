@@ -24,7 +24,7 @@ public class Seller implements Serializable {
 	private Integer id;
 	private String name;
 	private Integer cnpj;
-	private PackageProduct pckProduct;
+	
 	
 	@OneToMany(mappedBy = "seller")
     private List<Product> products = new ArrayList<>();
@@ -34,11 +34,31 @@ public class Seller implements Serializable {
 
 	}
 
-	public Seller(Integer id, String name, Integer cnpj, PackageProduct pckProduct, Status status) {
+	public Seller(Integer id, String name, Integer cnpj, Status status) {
 		this.id = id;
 		this.name = name;
 		this.cnpj = cnpj;
-		this.pckProduct = pckProduct;
+		this.status = status;
+	}
+	
+	public Seller(Integer id, String name, Integer cnpj) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.cnpj = cnpj;
+	}
+	
+	
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 
@@ -54,9 +74,7 @@ public class Seller implements Serializable {
 		return cnpj;
 	}
 
-	public PackageProduct getPckProduct() {
-		return pckProduct;
-	}
+	
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -70,10 +88,7 @@ public class Seller implements Serializable {
 		this.cnpj = cnpj;
 	}
 
-	public void setPckProduct(PackageProduct pckProduct) {
-		this.pckProduct = pckProduct;
-	}
-
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

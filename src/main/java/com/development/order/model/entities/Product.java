@@ -1,6 +1,8 @@
 package com.development.order.model.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
@@ -9,7 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Product implements Serializable{
@@ -26,8 +28,8 @@ public class Product implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "seller_ID")
 	private Seller seller;
-	@OneToOne(mappedBy = "product")
-	private PackageProduct pkgProduct;
+	@OneToMany(mappedBy = "product")
+	private List<PackageProduct> pkgs = new ArrayList<>();
 	
 
 
@@ -43,6 +45,11 @@ public class Product implements Serializable{
 		this.seller = seller;
 	}
 	
+	
+	public List<PackageProduct> getPkgs() {
+		return pkgs;
+	}
+
 	public Integer getId() {
 		return id;
 	}

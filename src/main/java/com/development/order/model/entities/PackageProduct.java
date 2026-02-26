@@ -39,24 +39,24 @@ public class PackageProduct implements Serializable {
 	public PackageProduct() {
 	}
 
-	public PackageProduct(Double weightDeclared, Double weightValidated, Integer id, Client client, Seller seller,
+	public PackageProduct(Double weightDeclared, Double weightValidated, Integer id, Client client,
 			Product product, Status status) {
 		this.weightDeclared = weightDeclared;
 		this.weightValidated = weightValidated;
 		this.id = id;
 		this.client = client;
-		this.seller = seller;
+		setSeller(product);
 		this.product = product;
 		this.status = status;
 	}
 	
 	
 
-	public PackageProduct(Integer id, Client client, Seller seller, Product product, Status status) {
+	public PackageProduct(Integer id, Client client, Product product, Status status) {
 		super();
 		this.id = id;
 		this.client = client;
-		this.seller = seller;
+		setSeller(product);
 		this.product = product;
 		this.status = status;
 	}
@@ -105,8 +105,8 @@ public class PackageProduct implements Serializable {
 		this.client = client;
 	}
 
-	public void setSeller(Seller seller) {
-		this.seller = seller;
+	public void setSeller(Product product) {
+		this.seller = product.getSeller();
 	}
 
 	public void setProduct(Product product) {

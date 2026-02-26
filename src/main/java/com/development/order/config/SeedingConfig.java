@@ -38,19 +38,21 @@ public class SeedingConfig implements CommandLineRunner {
 		Seller s1 = new Seller(null, "carlitos", 31392932);
 		Seller s2 = new Seller(null, "Hernadez", 421515324);
 		sRepository.saveAll(Arrays.asList(s1,s2));
-		Product p1 = new Product(null, "Notebook Gamer RTX 4060", 5899.90, "Eletrônicos", s2);
-		Product p2 = new Product(null, "Monitor 27\" 144Hz", 1299.00, "Eletrônicos", s1);
-		Product p3 = new Product(null, "Webcam Full HD", 219.90, "Acessórios", s2);
-		Product p4 = new Product(null, "Mesa 4x4", 219.90, "Acessórios", s1);
+		Product p1 = new Product(null, "Notebook Gamer RTX 4060", 5899.90, "Eletronics", s2);
+		Product p2 = new Product(null, "Monitor 27\" 144Hz", 1299.00, "Eletronics", s1);
+		Product p3 = new Product(null, "Webcam Full HD", 219.90, "accessories", s2);
+		Product p4 = new Product(null, "Mesa 4x4", 219.90, "accessories", s1);
 		pRepository.saveAll(Arrays.asList(p1,p2,p3,p4));
-		Client c1 = new Client(null, "luiz", 245663276, 323239241, Instant.now());
-		//Client c2 = new Client(null, "pamella", 625353242, 43532345, Instant.now());
 		s1.getProducts().addAll(Arrays.asList(p2,p4));
 		s2.getProducts().addAll(Arrays.asList(p1,p3));
-		cRepository.save(c1);
-		PackageProduct pkg1 = new PackageProduct(null,c1, s2, p4, Status.CREATED_BY_SELLER);
-		pkgRepository.save(pkg1);
-		cRepository.save(c1);
+		Client c1 = new Client(null, "luiz", 245663276, 323239241, Instant.now());
+		Client c2 = new Client(null, "pamella", 625353242, 43532345, Instant.now());
+		cRepository.saveAll(Arrays.asList(c1,c2));
+		PackageProduct pkg1 = new PackageProduct(null,c1,p4, Status.CREATED_BY_SELLER);
+		PackageProduct pkg2 = new PackageProduct(null,c2, p1, Status.CREATED_BY_SELLER);
+        p1.getPkgs().add(pkg2);
+        p4.getPkgs().add(pkg1);
+		pkgRepository.saveAll(Arrays.asList(pkg1,pkg2));
 		
 
 

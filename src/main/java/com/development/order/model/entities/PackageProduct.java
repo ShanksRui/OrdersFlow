@@ -36,6 +36,9 @@ public class PackageProduct implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "center_id")
 	private Center center;
+    @ManyToOne
+    @JoinColumn(name = "shipping_id")
+	private Shipping shipping;
 	
 	private Status status;
 
@@ -60,6 +63,9 @@ public class PackageProduct implements Serializable {
 		this.product = product;
 		this.status = status;
 		this.center = center;
+	}
+	public void setShipping(Shipping shipping) {
+		this.shipping = shipping;
 	}
 	
 	public Center getCenter() {

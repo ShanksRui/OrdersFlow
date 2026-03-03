@@ -1,6 +1,8 @@
 package com.development.order.config;
 
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +15,14 @@ import com.development.order.model.entities.Client;
 import com.development.order.model.entities.PackageProduct;
 import com.development.order.model.entities.Product;
 import com.development.order.model.entities.Seller;
+import com.development.order.model.entities.Shipping;
 import com.development.order.model.entities.enums.Status;
 import com.development.order.repositories.CenterRepository;
 import com.development.order.repositories.ClientRepository;
 import com.development.order.repositories.PackageProductRepository;
 import com.development.order.repositories.ProductRepository;
 import com.development.order.repositories.SellerRepository;
+import com.development.order.repositories.ShippingRepository;
 @Configuration
 @Profile("test")
 public class SeedingConfig implements CommandLineRunner {
@@ -33,6 +37,8 @@ public class SeedingConfig implements CommandLineRunner {
 	private PackageProductRepository pkgRepository;
 	@Autowired
 	private CenterRepository ctRepository;
+	@Autowired
+	private ShippingRepository shipRepository;
 
 	@Override
 
@@ -53,14 +59,18 @@ public class SeedingConfig implements CommandLineRunner {
 		Client c2 = new Client(null, "pamella", 625353242, 43532345, Instant.now());
 		cRepository.saveAll(Arrays.asList(c1,c2));
 		Center center1 = new Center(null,false, Status.CREATED_BY_SELLER);
+		Shipping ship = new Shipping(null, "Bags", LocalDate.of(2026, Month.NOVEMBER, 12), "Brasilia","Sao-Paulo", Status.IN_STATE_TRANSPORT);
 		ctRepository.save(center1);
+		shipRepository.save(ship);
 		PackageProduct pkg1 = new PackageProduct(null,c1,p4,center1, Status.CREATED_BY_SELLER);
 		PackageProduct pkg2 = new PackageProduct(null,c2, p1,center1, Status.CREATED_BY_SELLER);
 		center1.getPkgs().addAll(Arrays.asList(pkg1,pkg2));
 		center1.setQuantityPackages();
 		ctRepository.save(center1);
+		pkg1.setShipping(ship);
+		pkg2.setShipping(ship);
 		pkgRepository.saveAll(Arrays.asList(pkg1,pkg2));
-		
+		ship.getPkgs().addAll(Arrays.asList(pkg1,pkg2));
 		
 		
 

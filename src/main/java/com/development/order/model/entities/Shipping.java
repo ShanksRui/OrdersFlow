@@ -2,6 +2,8 @@ package com.development.order.model.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.development.order.model.entities.enums.Status;
@@ -10,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 @Entity
 public class Shipping implements Serializable{
 
@@ -19,7 +22,8 @@ public class Shipping implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private PackageProduct pckProduct;
+	@OneToMany(mappedBy = "shipping")
+	private List<PackageProduct> pkgs = new ArrayList<>();
 	private LocalDate dataPrevist;
 	private String localdeparture;
 	private String localDestinity;
@@ -29,11 +33,10 @@ public class Shipping implements Serializable{
 
 	}
 
-	public Shipping(Long id, String name, PackageProduct pckProduct, LocalDate dataPrevist, String localdeparture,
+	public Shipping(Long id, String name, LocalDate dataPrevist, String localdeparture,
 			String localDestinity, Status status) {
 		this.id = id;
 		this.name = name;
-		this.pckProduct = pckProduct;
 		this.dataPrevist = dataPrevist;
 		this.localdeparture = localdeparture;
 		this.localDestinity = localDestinity;
@@ -65,8 +68,8 @@ public class Shipping implements Serializable{
 		return name;
 	}
 
-	public PackageProduct getPckProduct() {
-		return pckProduct;
+	public List<PackageProduct> getPkgs() {
+		return pkgs;
 	}
 
 	public LocalDate getDataPrevist() {
@@ -83,10 +86,6 @@ public class Shipping implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public void setPckProduct(PackageProduct pckProduct) {
-		this.pckProduct = pckProduct;
 	}
 
 	public void setDataPrevist(LocalDate dataPrevist) {

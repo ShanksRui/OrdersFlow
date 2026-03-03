@@ -1,6 +1,8 @@
 package com.development.order.model.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.development.order.model.entities.enums.Status;
@@ -9,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 
 @Entity
@@ -18,23 +21,27 @@ public class Center implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	private Integer quantityPackages;
 	private boolean released;
 	private Status status;
+	@OneToMany(mappedBy = "center")
+	private List<PackageProduct> pkgs = new ArrayList<>();
 
 	public Center() {
 
 	}
 
-	public Center(Integer id, Integer quantityPackages, boolean released, Status status) {
+	public Center(Long id, boolean released, Status status) {
 		this.id = id;
-		this.quantityPackages = quantityPackages;
 		this.released = released;
 		this.status = status;
 	}
+	public List<PackageProduct> getPkgs(){
+		return pkgs;
+	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -50,12 +57,12 @@ public class Center implements Serializable{
 		return status;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public void setQuantityPackages(Integer quantityPackages) {
-		this.quantityPackages = quantityPackages;
+	public void setQuantityPackages() {
+		this.quantityPackages = pkgs.size();
 	}
 
 	public void setReleased(boolean released) {

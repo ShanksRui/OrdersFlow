@@ -8,11 +8,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.development.order.model.entities.Center;
 import com.development.order.model.entities.Client;
 import com.development.order.model.entities.PackageProduct;
 import com.development.order.model.entities.Product;
 import com.development.order.model.entities.Seller;
 import com.development.order.model.entities.enums.Status;
+import com.development.order.repositories.CenterRepository;
 import com.development.order.repositories.ClientRepository;
 import com.development.order.repositories.PackageProductRepository;
 import com.development.order.repositories.ProductRepository;
@@ -29,6 +31,8 @@ public class SeedingConfig implements CommandLineRunner {
 	private SellerRepository sRepository;
 	@Autowired
 	private PackageProductRepository pkgRepository;
+	@Autowired
+	private CenterRepository ctRepository;
 
 	@Override
 
@@ -48,11 +52,16 @@ public class SeedingConfig implements CommandLineRunner {
 		Client c1 = new Client(null, "luiz", 245663276, 323239241, Instant.now());
 		Client c2 = new Client(null, "pamella", 625353242, 43532345, Instant.now());
 		cRepository.saveAll(Arrays.asList(c1,c2));
-		PackageProduct pkg1 = new PackageProduct(null,c1,p4, Status.CREATED_BY_SELLER);
-		PackageProduct pkg2 = new PackageProduct(null,c2, p1, Status.CREATED_BY_SELLER);
-        p1.getPkgs().add(pkg2);
-        p4.getPkgs().add(pkg1);
+		Center center1 = new Center(null,false, Status.CREATED_BY_SELLER);
+		ctRepository.save(center1);
+		PackageProduct pkg1 = new PackageProduct(null,c1,p4,center1, Status.CREATED_BY_SELLER);
+		PackageProduct pkg2 = new PackageProduct(null,c2, p1,center1, Status.CREATED_BY_SELLER);
+		center1.getPkgs().addAll(Arrays.asList(pkg1,pkg2));
+		center1.setQuantityPackages();
+		ctRepository.save(center1);
 		pkgRepository.saveAll(Arrays.asList(pkg1,pkg2));
+		
+		
 		
 
 

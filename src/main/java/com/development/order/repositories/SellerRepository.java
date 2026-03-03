@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.development.order.model.entities.Seller;
 
-public interface SellerRepository extends JpaRepository<Seller, Integer>{
+public interface SellerRepository extends JpaRepository<Seller, Long>{
 
 }

@@ -17,7 +17,7 @@ public class Shipping implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	private String name;
 	private PackageProduct pckProduct;
 	private LocalDate dataPrevist;
@@ -29,7 +29,7 @@ public class Shipping implements Serializable{
 
 	}
 
-	public Shipping(Integer id, String name, PackageProduct pckProduct, LocalDate dataPrevist, String localdeparture,
+	public Shipping(Long id, String name, PackageProduct pckProduct, LocalDate dataPrevist, String localdeparture,
 			String localDestinity, Status status) {
 		this.id = id;
 		this.name = name;
@@ -57,7 +57,7 @@ public class Shipping implements Serializable{
 		this.localDestinity = localDestinity;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -77,7 +77,7 @@ public class Shipping implements Serializable{
 		return status;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -21,28 +21,19 @@ public class Seller implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	private String name;
 	private Integer cnpj;
 	
 	
 	@OneToMany(mappedBy = "seller")
     private List<Product> products = new ArrayList<>();
-	private Status status;
 
 	public Seller() {
 
 	}
 
-	public Seller(Integer id, String name, Integer cnpj, Status status) {
-		this.id = id;
-		this.name = name;
-		this.cnpj = cnpj;
-		this.status = status;
-	}
-	
-	public Seller(Integer id, String name, Integer cnpj) {
-		super();
+	public Seller(Long id, String name, Integer cnpj) {
 		this.id = id;
 		this.name = name;
 		this.cnpj = cnpj;
@@ -54,15 +45,7 @@ public class Seller implements Serializable {
 		return products;
 	}
 
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -74,9 +57,7 @@ public class Seller implements Serializable {
 		return cnpj;
 	}
 
-	
-
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

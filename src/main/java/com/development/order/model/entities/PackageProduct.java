@@ -23,7 +23,7 @@ public class PackageProduct implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private Client client;
@@ -33,13 +33,16 @@ public class PackageProduct implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "product_id")
 	private Product product;
+	@ManyToOne
+	@JoinColumn(name = "center_id")
+	private Center center;
 	
 	private Status status;
 
 	public PackageProduct() {
 	}
 
-	public PackageProduct(Double weightDeclared, Double weightValidated, Integer id, Client client,
+	public PackageProduct(Double weightDeclared, Double weightValidated, Long id, Client client,
 			Product product, Status status) {
 		this.weightDeclared = weightDeclared;
 		this.weightValidated = weightValidated;
@@ -50,15 +53,20 @@ public class PackageProduct implements Serializable {
 		this.status = status;
 	}
 	
-	
-
-	public PackageProduct(Integer id, Client client, Product product, Status status) {
-		super();
+	public PackageProduct(Long id, Client client, Product product,Center center, Status status) {
 		this.id = id;
 		this.client = client;
 		setSeller(product);
 		this.product = product;
 		this.status = status;
+		this.center = center;
+	}
+	
+	public Center getCenter() {
+		return center;
+	}
+	public void setCenter(Center center) {
+		this.center = center;
 	}
 
 	public Double getWeightDeclared() {
@@ -69,7 +77,7 @@ public class PackageProduct implements Serializable {
 		return weightValidated;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -97,7 +105,7 @@ public class PackageProduct implements Serializable {
 		this.weightValidated = weightValidated;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

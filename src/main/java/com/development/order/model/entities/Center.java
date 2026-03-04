@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.development.order.model.entities.enums.Status;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,19 +23,19 @@ public class Center implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Integer quantityPackages;
-	private boolean released;
-	private Status status;
+	private Double limitPackages;
+
 	@OneToMany(mappedBy = "center")
+	@JsonIgnore
 	private List<PackageProduct> pkgs = new ArrayList<>();
 
 	public Center() {
 
 	}
 
-	public Center(Long id, boolean released, Status status) {
+	public Center(Long id,Double limitPackages) {
 		this.id = id;
-		this.released = released;
-		this.status = status;
+		this.setLimitPackages(limitPackages);
 	}
 	public List<PackageProduct> getPkgs(){
 		return pkgs;
@@ -49,14 +49,6 @@ public class Center implements Serializable{
 		return quantityPackages;
 	}
 
-	public boolean isReleased() {
-		return released;
-	}
-
-	public Status getStatus() {
-		return status;
-	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -64,13 +56,13 @@ public class Center implements Serializable{
 	public void setQuantityPackages() {
 		this.quantityPackages = pkgs.size();
 	}
-
-	public void setReleased(boolean released) {
-		this.released = released;
+	
+	public Double getLimitPackages() {
+		return limitPackages;
 	}
 
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setLimitPackages(Double limitPackages) {
+		this.limitPackages = limitPackages;
 	}
 
 	@Override

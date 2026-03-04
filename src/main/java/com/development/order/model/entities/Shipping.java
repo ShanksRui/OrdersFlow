@@ -12,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 @Entity
 public class Shipping implements Serializable{
@@ -24,23 +25,19 @@ public class Shipping implements Serializable{
 	private String name;
 	@OneToMany(mappedBy = "shipping")
 	private List<PackageProduct> pkgs = new ArrayList<>();
-	private LocalDate dataPrevist;
 	private String localdeparture;
 	private String localDestinity;
-	private Status status;
 
 	public Shipping() {
 
 	}
 
-	public Shipping(Long id, String name, LocalDate dataPrevist, String localdeparture,
+	public Shipping(Long id, String name, String localdeparture,
 			String localDestinity, Status status) {
 		this.id = id;
 		this.name = name;
-		this.dataPrevist = dataPrevist;
 		this.localdeparture = localdeparture;
 		this.localDestinity = localDestinity;
-		this.status = status;
 	}
 
 
@@ -72,28 +69,12 @@ public class Shipping implements Serializable{
 		return pkgs;
 	}
 
-	public LocalDate getDataPrevist() {
-		return dataPrevist;
-	}
-
-	public Status getStatus() {
-		return status;
-	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public void setDataPrevist(LocalDate dataPrevist) {
-		this.dataPrevist = dataPrevist;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
 	}
 
 	@Override

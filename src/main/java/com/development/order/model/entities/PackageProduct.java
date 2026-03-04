@@ -1,6 +1,7 @@
 package com.development.order.model.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 
 import com.development.order.model.entities.enums.Status;
@@ -11,7 +12,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 
 @Entity
 public class PackageProduct implements Serializable {
@@ -39,7 +39,8 @@ public class PackageProduct implements Serializable {
     @ManyToOne
     @JoinColumn(name = "shipping_id")
 	private Shipping shipping;
-	
+    
+	private LocalDate dataPrevist;
 	private Status status;
 
 	public PackageProduct() {
@@ -56,13 +57,14 @@ public class PackageProduct implements Serializable {
 		this.status = status;
 	}
 	
-	public PackageProduct(Long id, Client client, Product product,Center center, Status status) {
+	public PackageProduct(Long id,LocalDate dataPrevist, Client client, Product product,Center center, Status status) {
 		this.id = id;
 		this.client = client;
 		setSeller(product);
 		this.product = product;
 		this.status = status;
 		this.center = center;
+		this.dataPrevist = dataPrevist;
 	}
 	public void setShipping(Shipping shipping) {
 		this.shipping = shipping;
@@ -130,6 +132,13 @@ public class PackageProduct implements Serializable {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
+	public LocalDate getDataPrevist() {
+		return dataPrevist;
+	}
+
+	public void setDataPrevist(LocalDate dataPrevist) {
+		this.dataPrevist = dataPrevist;
+	}
 
 	@Override
 	public int hashCode() {
@@ -147,4 +156,5 @@ public class PackageProduct implements Serializable {
 		PackageProduct other = (PackageProduct) obj;
 		return Objects.equals(id, other.id);
 	}
+
 }

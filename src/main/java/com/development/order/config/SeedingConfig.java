@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.development.order.model.entities.Center;
 import com.development.order.model.entities.Client;
+import com.development.order.model.entities.Order;
 import com.development.order.model.entities.PackageProduct;
 import com.development.order.model.entities.Product;
 import com.development.order.model.entities.Seller;
@@ -18,6 +19,7 @@ import com.development.order.model.entities.Shipping;
 import com.development.order.model.entities.enums.Status;
 import com.development.order.repositories.CenterRepository;
 import com.development.order.repositories.ClientRepository;
+import com.development.order.repositories.OrderRepository;
 import com.development.order.repositories.PackageProductRepository;
 import com.development.order.repositories.ProductRepository;
 import com.development.order.repositories.SellerRepository;
@@ -38,6 +40,8 @@ public class SeedingConfig implements CommandLineRunner {
 	private CenterRepository ctRepository;
 	@Autowired
 	private ShippingRepository shipRepository;
+	@Autowired
+	private OrderRepository oRepository;
 
 	
 	
@@ -59,7 +63,7 @@ public class SeedingConfig implements CommandLineRunner {
 		Client c1 = new Client(null, "luiz", 245663276, 323239241, Instant.now());
 		Client c2 = new Client(null, "pamella", 625353242, 43532345, Instant.now());
 		cRepository.saveAll(Arrays.asList(c1,c2));
-		Center center1 = new Center(null,800.0);
+		Center center1 = new Center(null,800);
 		Shipping ship = new Shipping(null, "Bags", "Brasilia","Sao-Paulo", Status.IN_STATE_TRANSPORT);
 		ctRepository.save(center1);
 		shipRepository.save(ship);
@@ -72,10 +76,9 @@ public class SeedingConfig implements CommandLineRunner {
 		pkg2.setShipping(ship);
 		pkgRepository.saveAll(Arrays.asList(pkg1,pkg2));
 		ship.getPkgs().addAll(Arrays.asList(pkg1,pkg2));
+		Order o1 = new Order(null, Instant.now(), c2);
+		Order o2 = new Order(null, Instant.now(), c1);
 		
-		
-
-
 	}
 
 }

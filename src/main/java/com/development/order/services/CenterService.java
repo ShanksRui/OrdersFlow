@@ -11,18 +11,26 @@ import com.development.order.repositories.CenterRepository;
 public class CenterService {
 
 	private CenterRepository repository;
-	
+
 	public CenterService(CenterRepository repository) {
 		this.repository = repository;
 	}
-	
+
 	public void insert(Center center) {
-		if(repository.existsById(center.getId())) {
+		if (repository.existsById(center.getId())) {
 			throw new IllegalArgumentException("already exitst ById in data Base");
 		}
 		repository.save(center);
 	}
-   public List<Center> findAll() {
-	   return repository.findAll();
-   }
+
+	public List<Center> findAll() {
+		return repository.findAll();
+	}
+
+	public static Boolean validationWeight(Double weightDeclared, Double weightValited) {
+		if (weightDeclared > weightValited) {
+		  throw new IllegalArgumentException("weight is not at is limited");
+		}
+		return true;
+	}
 }

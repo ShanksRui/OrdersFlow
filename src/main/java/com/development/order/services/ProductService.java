@@ -1,7 +1,10 @@
 package com.development.order.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.development.order.model.entities.Center;
 import com.development.order.model.entities.Product;
 import com.development.order.repositories.ProductRepository;
 
@@ -20,5 +23,7 @@ private ProductRepository repository;
 		}
 		repository.save(product);
 	}
-	
+	public List<Product> findAll() {
+		return repository.findAll();
+	}
 }

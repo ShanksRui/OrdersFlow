@@ -18,9 +18,6 @@ public class PackageProduct implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Double weightDeclared;
-	private Double weightValidated;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -36,28 +33,32 @@ public class PackageProduct implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "center_id")
 	private Center center;
-    @ManyToOne
-    @JoinColumn(name = "shipping_id")
+	@ManyToOne
+	@JoinColumn(name = "shipping_id")
 	private Shipping shipping;
-    
+	@ManyToOne
+	@JoinColumn(name = "order_id")
+	private Order order;
 	private LocalDate dataPrevist;
 	private Status status;
+	private boolean WeightResultValidaton;
+	private Double weightDeclared;
+
 
 	public PackageProduct() {
 	}
 
-	public PackageProduct(Double weightDeclared, Double weightValidated, Long id, Client client,
-			Product product, Status status) {
+	public PackageProduct(Double weightDeclared, Long id, Client client, Product product, Status status) {
 		this.weightDeclared = weightDeclared;
-		this.weightValidated = weightValidated;
 		this.id = id;
 		this.client = client;
 		setSeller(product);
 		this.product = product;
 		this.status = status;
 	}
-	
-	public PackageProduct(Long id,LocalDate dataPrevist, Client client, Product product,Center center, Status status) {
+
+	public PackageProduct(Long id, LocalDate dataPrevist, Client client, Product product, Center center,
+			Status status) {
 		this.id = id;
 		this.client = client;
 		setSeller(product);
@@ -66,23 +67,21 @@ public class PackageProduct implements Serializable {
 		this.center = center;
 		this.dataPrevist = dataPrevist;
 	}
+
 	public void setShipping(Shipping shipping) {
 		this.shipping = shipping;
 	}
-	
+
 	public Center getCenter() {
 		return center;
 	}
+
 	public void setCenter(Center center) {
 		this.center = center;
 	}
 
 	public Double getWeightDeclared() {
 		return weightDeclared;
-	}
-
-	public Double getWeightValidated() {
-		return weightValidated;
 	}
 
 	public Long getId() {
@@ -109,10 +108,6 @@ public class PackageProduct implements Serializable {
 		this.weightDeclared = weightDeclared;
 	}
 
-	public void setWeightValidated(Double weightValidated) {
-		this.weightValidated = weightValidated;
-	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -132,6 +127,7 @@ public class PackageProduct implements Serializable {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
+
 	public LocalDate getDataPrevist() {
 		return dataPrevist;
 	}

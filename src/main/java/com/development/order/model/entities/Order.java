@@ -1,70 +1,74 @@
 package com.development.order.model.entities;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
-
 @Entity
-public class Center implements Serializable{
-
+public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private Integer quantityPackages;
-	private Integer limitPackages;
 
-	@OneToMany(mappedBy = "center")
-	@JsonIgnore
+	private Instant mommentBuy;
+	
+	@ManyToOne
+	@JoinColumn(name = "client_id")
+	private Client client;
+	
+	@OneToMany(mappedBy = "order")
 	private List<PackageProduct> pkgs = new ArrayList<>();
 
-	public Center() {
-
+	public Order () {
+		
 	}
-
-	public Center(Long id,Integer limitPackages) {
+	
+	public Order(Long id, Instant mommentBuy, Client client) {
 		this.id = id;
-		this.setLimitPackages(limitPackages);
-	}
-	public List<PackageProduct> getPkgs(){
-		return pkgs;
+		this.mommentBuy = mommentBuy;
+		this.client = client;
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public Integer getQuantityPackages() {
-		return quantityPackages;
+	public Instant getMommentBuy() {
+		return mommentBuy;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public List<PackageProduct> getPkgs() {
+		return pkgs;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public void setQuantityPackages() {
-		this.quantityPackages = pkgs.size();
-	}
-	
-	public Integer getLimitPackages() {
-		return limitPackages;
+	public void setMommentBuy(Instant mommentBuy) {
+		this.mommentBuy = mommentBuy;
 	}
 
-	public void setLimitPackages(Integer limitPackages) {
-		this.limitPackages = limitPackages;
+	public void setClient(Client client) {
+		this.client = client;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -78,8 +82,7 @@ public class Center implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Center other = (Center) obj;
+		Order other = (Order) obj;
 		return Objects.equals(id, other.id);
 	}
-
 }

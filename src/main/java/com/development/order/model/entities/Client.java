@@ -10,8 +10,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -27,7 +25,6 @@ public class Client implements Serializable {
 	private String name;
 	private Integer cpf;
 	private Integer cep;
-	private Instant DataBuy;
 	@OneToMany(mappedBy = "client")
 	private List<PackageProduct> pkgs = new ArrayList<>();
 
@@ -40,7 +37,6 @@ public class Client implements Serializable {
 		this.name = name;
 		this.cpf = cpf;
 		this.cep = cep;
-		this.DataBuy = DataBuy;
 	}
 
 	public List<PackageProduct> getPkgs(){
@@ -76,14 +72,6 @@ public class Client implements Serializable {
 
 	public void setLocality(Integer cep) {
 		this.cep = cep;
-	}
-
-	public Instant getDataBuy() {
-		return DataBuy;
-	}
-
-	public void setDataBuy(Instant dataBuy) {
-		DataBuy = dataBuy;
 	}
 
 	@Override

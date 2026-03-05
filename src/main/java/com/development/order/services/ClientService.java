@@ -1,5 +1,7 @@
 package com.development.order.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.development.order.model.entities.Client;
@@ -20,5 +22,7 @@ public class ClientService {
 		}
 		repository.save(client);
 	}
-	
+	public List<Client> findAll() {
+		return repository.findAll();
+	}
 }

@@ -13,8 +13,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "tb_order")
 public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -35,10 +37,10 @@ public class Order implements Serializable {
 		
 	}
 	
-	public Order(Long id, Instant mommentBuy, Client client) {
+	public Order(Long id, Instant mommentBuy) {
 		this.id = id;
 		this.mommentBuy = mommentBuy;
-		this.client = client;
+		
 	}
 
 	public Long getId() {
@@ -56,7 +58,11 @@ public class Order implements Serializable {
 	public List<PackageProduct> getPkgs() {
 		return pkgs;
 	}
-
+	public void addPackage(PackageProduct pkg) {
+	     this.pkgs.add(pkg);
+	     pkg.setOrder(this);
+	     setClient(pkg.getClient());
+	}
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -66,7 +72,7 @@ public class Order implements Serializable {
 	}
 
 	public void setClient(Client client) {
-		this.client = client;
+		 this.client = client;
 	}
 
 	@Override

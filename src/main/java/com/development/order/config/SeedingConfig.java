@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-
+import com.development.order.OrderPackageApplication;
 import com.development.order.model.entities.Center;
 import com.development.order.model.entities.Client;
 import com.development.order.model.entities.Order;
@@ -24,9 +24,11 @@ import com.development.order.repositories.PackageProductRepository;
 import com.development.order.repositories.ProductRepository;
 import com.development.order.repositories.SellerRepository;
 import com.development.order.repositories.ShippingRepository;
+
 @Configuration
 @Profile("test")
 public class SeedingConfig implements CommandLineRunner {
+
 
 	@Autowired
 	private ClientRepository cRepository;
@@ -43,9 +45,7 @@ public class SeedingConfig implements CommandLineRunner {
 	@Autowired
 	private OrderRepository oRepository;
 
-	
-	
-	
+
 	@Override
 	public void run(String... args) throws Exception {
 
@@ -76,8 +76,13 @@ public class SeedingConfig implements CommandLineRunner {
 		pkg2.setShipping(ship);
 		pkgRepository.saveAll(Arrays.asList(pkg1,pkg2));
 		ship.getPkgs().addAll(Arrays.asList(pkg1,pkg2));
-		Order o1 = new Order(null, Instant.now(), c2);
-		Order o2 = new Order(null, Instant.now(), c1);
+		Order o1 = new Order(null, Instant.now());
+		Order o2 = new Order(null, Instant.now());
+		o1.addPackage(pkg2);
+		o2.addPackage(pkg1);
+		oRepository.saveAll(Arrays.asList(o1,o2));
+		pkgRepository.saveAll(Arrays.asList(pkg1,pkg2));
+
 		
 	}
 

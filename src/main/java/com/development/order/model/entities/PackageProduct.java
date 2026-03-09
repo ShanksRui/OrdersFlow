@@ -67,6 +67,23 @@ public class PackageProduct implements Serializable {
 		this.center = center;
 		this.dataPrevist = dataPrevist;
 	}
+	
+
+	public Shipping getShipping() {
+		return shipping;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setSeller(Seller seller) {
+		this.seller = seller;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
 
 	public void setShipping(Shipping shipping) {
 		this.shipping = shipping;

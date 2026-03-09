@@ -61,7 +61,7 @@ public class Order implements Serializable {
 	public void addPackage(PackageProduct pkg) {
 	     this.pkgs.add(pkg);
 	     pkg.setOrder(this);
-	     setClient(pkg.getClient());
+	     pkg.setClient(this.getClient());
 	}
 	public void setId(Long id) {
 		this.id = id;

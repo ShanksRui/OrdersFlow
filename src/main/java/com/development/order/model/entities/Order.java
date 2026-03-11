@@ -37,9 +37,10 @@ public class Order implements Serializable {
 		
 	}
 	
-	public Order(Long id, Instant mommentBuy) {
+	public Order(Long id, Instant mommentBuy,Client client) {
 		this.id = id;
 		this.mommentBuy = mommentBuy;
+		this.client = client;
 		
 	}
 
@@ -59,9 +60,9 @@ public class Order implements Serializable {
 		return pkgs;
 	}
 	public void addPackage(PackageProduct pkg) {
-	     this.pkgs.add(pkg);
+	     pkgs.add(pkg);
 	     pkg.setOrder(this);
-	     pkg.setClient(this.getClient());
+	     pkg.setClient(getClient());
 	}
 	public void setId(Long id) {
 		this.id = id;

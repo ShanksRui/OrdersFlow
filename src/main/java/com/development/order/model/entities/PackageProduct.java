@@ -48,19 +48,17 @@ public class PackageProduct implements Serializable {
 	public PackageProduct() {
 	}
 
-	public PackageProduct(Double weightDeclared, Long id, Client client, Product product, Status status) {
+	public PackageProduct(Double weightDeclared, Long id, Product product, Status status) {
 		this.weightDeclared = weightDeclared;
 		this.id = id;
-		this.client = client;
 		setSeller(product);
 		this.product = product;
 		this.status = status;
 	}
 
-	public PackageProduct(Long id, LocalDate dataPrevist, Client client, Product product, Center center,
+	public PackageProduct(Long id, LocalDate dataPrevist, Product product, Center center,
 			Status status) {
 		this.id = id;
-		this.client = client;
 		setSeller(product);
 		this.product = product;
 		this.status = status;

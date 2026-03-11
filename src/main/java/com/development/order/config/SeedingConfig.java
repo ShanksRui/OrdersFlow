@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import com.development.order.OrderPackageApplication;
+
 import com.development.order.model.entities.Center;
 import com.development.order.model.entities.Client;
 import com.development.order.model.entities.Order;
@@ -53,6 +53,7 @@ public class SeedingConfig implements CommandLineRunner {
 		Seller s1 = new Seller(null, "carlitos", 31392932);
 		Seller s2 = new Seller(null, "Hernadez", 421515324);
 		sRepository.saveAll(Arrays.asList(s1,s2));
+		
 		Product p1 = new Product(null, "Notebook Gamer RTX 4060", 5899.90, "Eletronics", s2);
 		Product p2 = new Product(null, "Monitor 27\" 144Hz", 1299.00, "Eletronics", s1);
 		Product p3 = new Product(null, "Webcam Full HD", 219.90, "accessories", s2);
@@ -60,15 +61,17 @@ public class SeedingConfig implements CommandLineRunner {
 		pRepository.saveAll(Arrays.asList(p1,p2,p3,p4));
 		s1.getProducts().addAll(Arrays.asList(p2,p4));
 		s2.getProducts().addAll(Arrays.asList(p1,p3));
+		
 		Client c1 = new Client(null, "luiz", 245663276, 323239241, Instant.now());
 		Client c2 = new Client(null, "pamella", 625353242, 43532345, Instant.now());
 		cRepository.saveAll(Arrays.asList(c1,c2));
+		
 		Center center1 = new Center(null,800);
 		Shipping ship = new Shipping(null, "Bags", "Brasilia","Sao-Paulo", Status.IN_STATE_TRANSPORT);
 		ctRepository.save(center1);
 		shipRepository.save(ship);
-		PackageProduct pkg1 = new PackageProduct(null,LocalDate.of(2026, 10, 12),c1,p4,center1, Status.CREATED_BY_SELLER);
-		PackageProduct pkg2 = new PackageProduct(null,LocalDate.of(2026, 9, 03),c2, p1,center1, Status.CREATED_BY_SELLER);
+		PackageProduct pkg1 = new PackageProduct(null,LocalDate.of(2026, 10, 12),p4,center1, Status.CREATED_BY_SELLER);
+		PackageProduct pkg2 = new PackageProduct(null,LocalDate.of(2026, 9, 03),p1,center1, Status.CREATED_BY_SELLER);
 		center1.getPkgs().addAll(Arrays.asList(pkg1,pkg2));
 		center1.setQuantityPackages();
 		ctRepository.save(center1);
@@ -76,8 +79,9 @@ public class SeedingConfig implements CommandLineRunner {
 		pkg2.setShipping(ship);
 		pkgRepository.saveAll(Arrays.asList(pkg1,pkg2));
 		ship.getPkgs().addAll(Arrays.asList(pkg1,pkg2));
-		Order o1 = new Order(null, Instant.now());
-		Order o2 = new Order(null, Instant.now());
+		
+		Order o1 = new Order(null, Instant.now(),c2);
+		Order o2 = new Order(null, Instant.now(),c1);
 		o1.addPackage(pkg2);
 		o2.addPackage(pkg1);
 		oRepository.saveAll(Arrays.asList(o1,o2));

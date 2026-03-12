@@ -24,8 +24,7 @@ public class ClientResource {
 	
 	@GetMapping
 	public ResponseEntity<List<ClientDTO>> findall(){
-		List<Client> clients = service.findAll();
-		List<ClientDTO> dtos = clients.stream()
+		List<ClientDTO> dtos = service.findAll().stream()
 				.map(ClientDTO::new)
 				.collect(Collectors.toList());
 		return ResponseEntity.ok().body(dtos);

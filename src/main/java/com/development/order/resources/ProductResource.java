@@ -27,6 +27,5 @@ public class ProductResource {
 				.stream().map(ProductDTO::new).collect(Collectors.toList());
 		return ResponseEntity.ok().body(dtos);
 	}
-	//CRIEI O PRODUCT RESOURCE,SEU DTO E SETEI O SELLERDTO INTERNAMENT NO PRODUCTDTO PARA MANTER
-	// UM RELACIONAMENTO LIGADO SEM EXPOR AS ENTITIES DIRETAMENTE,CRIAR COMMIT PARA ISSO NAO SE ESQUECA
+	
 }

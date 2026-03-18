@@ -1,7 +1,6 @@
 package com.development.order.model.entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -13,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 @Entity
 public class Shipping implements Serializable{
@@ -27,19 +27,37 @@ public class Shipping implements Serializable{
 	private List<PackageProduct> pkgs = new ArrayList<>();
 	private String localdeparture;
 	private String localDestinity;
+	@ManyToOne
+	@JoinColumn(name = "center_id")
+	private Center center;
 
 	public Shipping() {
 
 	}
 
 	public Shipping(Long id, String name, String localdeparture,
-			String localDestinity, Status status) {
+			String localDestinity, Status status,Center center) {
 		this.id = id;
 		this.name = name;
 		this.localdeparture = localdeparture;
 		this.localDestinity = localDestinity;
+		this.center = center;
+	}
+	
+	public Center getCenter() {
+		return center;
 	}
 
+	public void setCenter(Center center) {
+		this.center = center;
+	}
+
+	public void addPkg (PackageProduct pkg) {
+		if (pkg.getCenter() != this.center) {
+			throw new IllegalArgumentException("centers different");
+		}
+		pkgs.add(pkg);
+	}
 
 	public String getLocaldeparture() {
 		return localdeparture;

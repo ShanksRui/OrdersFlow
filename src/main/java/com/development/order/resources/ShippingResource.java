@@ -8,24 +8,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.development.order.model.dto.CenterDTO;
-import com.development.order.services.CenterService;
+import com.development.order.model.dto.ShippingDTO;
+import com.development.order.services.ShippingService;
 
 @RestController
-@RequestMapping("/centers")
-public class CenterResource {
+@RequestMapping("shippings")
+public class ShippingResource {
+
 	
-	private CenterService service;
+private ShippingService service;
 	
-	public CenterResource(CenterService service) {
+	public ShippingResource(ShippingService service) {
 		this.service = service;
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<CenterDTO>> findAll(){
-		List<CenterDTO> dtos = service.findAll()
-				.stream().map(CenterDTO::new).collect(Collectors.toList());
+	public ResponseEntity<List<ShippingDTO>> findAll() {
+		List<ShippingDTO> dtos = service.findAll()
+				.stream().map(ShippingDTO::new).collect(Collectors.toList());
 		return ResponseEntity.ok().body(dtos);
 	}
-
+	
 }

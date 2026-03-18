@@ -44,7 +44,6 @@ public class PackageProduct implements Serializable {
 	private boolean WeightResultValidaton;
 	private Double weightDeclared;
 
-
 	public PackageProduct() {
 	}
 
@@ -56,8 +55,7 @@ public class PackageProduct implements Serializable {
 		this.status = status;
 	}
 
-	public PackageProduct(Long id, LocalDate dataPrevist, Product product, Center center,
-			Status status) {
+	public PackageProduct(Long id, LocalDate dataPrevist, Product product, Center center, Status status) {
 		this.id = id;
 		setSeller(product);
 		this.product = product;
@@ -65,7 +63,6 @@ public class PackageProduct implements Serializable {
 		this.center = center;
 		this.dataPrevist = dataPrevist;
 	}
-	
 
 	public Shipping getShipping() {
 		return shipping;
@@ -149,6 +146,14 @@ public class PackageProduct implements Serializable {
 
 	public void setDataPrevist(LocalDate dataPrevist) {
 		this.dataPrevist = dataPrevist;
+	}
+
+	public boolean getWeightResultValidaton() {
+		return WeightResultValidaton;
+	}
+
+	public void setWeightResultValidaton(boolean weightResultValidaton) {
+		WeightResultValidaton = weightResultValidaton;
 	}
 
 	@Override

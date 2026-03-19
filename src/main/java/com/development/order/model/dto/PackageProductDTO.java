@@ -3,14 +3,14 @@ package com.development.order.model.dto;
 import java.time.LocalDate;
 
 import com.development.order.model.entities.PackageProduct;
-import com.development.order.model.entities.enums.Status;
+import com.development.order.model.entities.enums.PackageStatus;
 
 public class PackageProductDTO {
 
 	private Long id;
 	private InfoPackageDTO info;
 	private LocalDate dataPrevist;
-	private Status status;
+	private PackageStatus status;
 	private boolean WeightResultValidation;
 	private Double weightDeclared;
 
@@ -34,7 +34,7 @@ public class PackageProductDTO {
 		return dataPrevist;
 	}
 
-	public Status getStatus() {
+	public PackageStatus getStatus() {
 		return status;
 	}
 
@@ -54,7 +54,7 @@ public class PackageProductDTO {
 		this.dataPrevist = dataPrevist;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(PackageStatus status) {
 		this.status = status;
 	}
 

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import com.development.order.model.entities.enums.Status;
+import com.development.order.model.entities.enums.PackageStatus;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,14 +40,14 @@ public class PackageProduct implements Serializable {
 	@JoinColumn(name = "order_id")
 	private Order order;
 	private LocalDate dataPrevist;
-	private Status status;
+	private PackageStatus status;
 	private boolean WeightResultValidation;
 	private Double weightDeclared;
 
 	public PackageProduct() {
 	}
 
-	public PackageProduct(Double weightDeclared, Long id, Product product, Status status) {
+	public PackageProduct(Double weightDeclared, Long id, Product product, PackageStatus status) {
 		this.weightDeclared = weightDeclared;
 		this.id = id;
 		setSeller(product);
@@ -55,7 +55,7 @@ public class PackageProduct implements Serializable {
 		this.status = status;
 	}
 
-	public PackageProduct(Long id, LocalDate dataPrevist, Product product, Center center, Status status) {
+	public PackageProduct(Long id, LocalDate dataPrevist, Product product, Center center, PackageStatus status) {
 		this.id = id;
 		setSeller(product);
 		this.product = product;
@@ -112,7 +112,7 @@ public class PackageProduct implements Serializable {
 		return product;
 	}
 
-	public Status getStatus() {
+	public PackageStatus getStatus() {
 		return status;
 	}
 
@@ -136,7 +136,7 @@ public class PackageProduct implements Serializable {
 		this.product = product;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(PackageStatus status) {
 		this.status = status;
 	}
 
@@ -152,8 +152,8 @@ public class PackageProduct implements Serializable {
 		return WeightResultValidation;
 	}
 
-	public void setWeightResultValidation(boolean weightResultValidation) {
-		WeightResultValidation = weightResultValidation;
+	public void setWeightResultValidaton(boolean weightResultValidaton) {
+		WeightResultValidation = weightResultValidaton;
 	}
 
 	@Override

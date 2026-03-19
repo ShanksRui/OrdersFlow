@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.development.order.model.entities.enums.Status;
+import com.development.order.model.entities.enums.ShippingStatus;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,11 +14,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+
 @Entity
-public class Shipping implements Serializable{
+public class Shipping implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -27,6 +28,7 @@ public class Shipping implements Serializable{
 	private List<PackageProduct> pkgs = new ArrayList<>();
 	private String localdeparture;
 	private String localDestinity;
+	private ShippingStatus status;
 	@ManyToOne
 	@JoinColumn(name = "center_id")
 	private Center center;
@@ -35,15 +37,15 @@ public class Shipping implements Serializable{
 
 	}
 
-	public Shipping(Long id, String name, String localdeparture,
-			String localDestinity, Status status,Center center) {
+	public Shipping(Long id, String name, String localdeparture, String localDestinity, ShippingStatus status,
+			Center center) {
 		this.id = id;
 		this.name = name;
 		this.localdeparture = localdeparture;
 		this.localDestinity = localDestinity;
 		this.center = center;
 	}
-	
+
 	public Center getCenter() {
 		return center;
 	}
@@ -52,7 +54,7 @@ public class Shipping implements Serializable{
 		this.center = center;
 	}
 
-	public void addPkg (PackageProduct pkg) {
+	public void addPkg(PackageProduct pkg) {
 		if (pkg.getCenter() != this.center) {
 			throw new IllegalArgumentException("centers different");
 		}
@@ -95,6 +97,14 @@ public class Shipping implements Serializable{
 		this.name = name;
 	}
 
+	public ShippingStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ShippingStatus status) {
+		this.status = status;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -111,5 +121,4 @@ public class Shipping implements Serializable{
 		Shipping other = (Shipping) obj;
 		return Objects.equals(id, other.id);
 	}
-
 }

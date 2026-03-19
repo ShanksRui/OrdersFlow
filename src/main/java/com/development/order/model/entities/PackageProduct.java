@@ -41,7 +41,7 @@ public class PackageProduct implements Serializable {
 	private Order order;
 	private LocalDate dataPrevist;
 	private Status status;
-	private boolean WeightResultValidaton;
+	private boolean WeightResultValidation;
 	private Double weightDeclared;
 
 	public PackageProduct() {
@@ -148,12 +148,12 @@ public class PackageProduct implements Serializable {
 		this.dataPrevist = dataPrevist;
 	}
 
-	public boolean getWeightResultValidaton() {
-		return WeightResultValidaton;
+	public boolean getWeightResultValidation() {
+		return WeightResultValidation;
 	}
 
-	public void setWeightResultValidaton(boolean weightResultValidaton) {
-		WeightResultValidaton = weightResultValidaton;
+	public void setWeightResultValidation(boolean weightResultValidation) {
+		WeightResultValidation = weightResultValidation;
 	}
 
 	@Override

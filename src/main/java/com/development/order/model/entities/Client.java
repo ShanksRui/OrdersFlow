@@ -32,7 +32,7 @@ public class Client implements Serializable {
 
 	}
 
-	public Client(Long id, String name, Integer cpf, Integer cep, Instant DataBuy) {
+	public Client(Long id, String name, Integer cpf, Integer cep) {
 		this.id = id;
 		this.name = name;
 		this.cpf = cpf;

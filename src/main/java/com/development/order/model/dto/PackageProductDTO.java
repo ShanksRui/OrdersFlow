@@ -11,7 +11,7 @@ public class PackageProductDTO {
 	private InfoPackageDTO info;
 	private LocalDate dataPrevist;
 	private Status status;
-	private boolean WeightResultValidaton;
+	private boolean WeightResultValidation;
 	private Double weightDeclared;
 
 	public PackageProductDTO() {
@@ -22,7 +22,7 @@ public class PackageProductDTO {
 		this.id = pkg.getId();
 		this.dataPrevist = pkg.getDataPrevist();
 		this.status = pkg.getStatus();
-		this.WeightResultValidaton = pkg.getWeightResultValidaton();
+		this.WeightResultValidation = pkg.getWeightResultValidation();
 		this.weightDeclared = pkg.getWeightDeclared();
 		info = new InfoPackageDTO(pkg);
 	}
@@ -38,8 +38,8 @@ public class PackageProductDTO {
 		return status;
 	}
 
-	public boolean isWeightResultValidaton() {
-		return WeightResultValidaton;
+	public boolean isWeightResultValidation() {
+		return WeightResultValidation;
 	}
 
 	public Double getWeightDeclared() {
@@ -58,8 +58,8 @@ public class PackageProductDTO {
 		this.status = status;
 	}
 
-	public void setWeightResultValidaton(boolean weightResultValidaton) {
-		WeightResultValidaton = weightResultValidaton;
+	public void setWeightResultValidation(boolean weightResultValidation) {
+		WeightResultValidation = weightResultValidation;
 	}
 
 	public void setWeightDeclared(Double weightDeclared) {

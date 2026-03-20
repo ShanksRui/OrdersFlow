@@ -16,7 +16,8 @@ import com.development.order.model.entities.PackageProduct;
 import com.development.order.model.entities.Product;
 import com.development.order.model.entities.Seller;
 import com.development.order.model.entities.Shipping;
-import com.development.order.model.entities.enums.Status;
+import com.development.order.model.entities.enums.PackageStatus;
+import com.development.order.model.entities.enums.ShippingStatus;
 import com.development.order.repositories.CenterRepository;
 import com.development.order.repositories.ClientRepository;
 import com.development.order.repositories.OrderRepository;
@@ -67,11 +68,11 @@ public class SeedingConfig implements CommandLineRunner {
 		cRepository.saveAll(Arrays.asList(c1,c2));
 		
 		Center center1 = new Center(null,800);
-		Shipping ship = new Shipping(null, "Bags", "Brasilia","Sao-Paulo", Status.IN_STATE_TRANSPORT,center1);
+		Shipping ship = new Shipping(null, "Bags", "Brasilia","Sao-Paulo", ShippingStatus.CREATED,center1);
 		ctRepository.save(center1);
 		shipRepository.save(ship);
-		PackageProduct pkg1 = new PackageProduct(null,LocalDate.of(2026, 10, 12),p4,center1, Status.CREATED_BY_SELLER);
-		PackageProduct pkg2 = new PackageProduct(null,LocalDate.of(2026, 9, 03),p1,center1, Status.CREATED_BY_SELLER);
+		PackageProduct pkg1 = new PackageProduct(null,LocalDate.of(2026, 10, 12),p4,center1, PackageStatus.CREATED_BY_SELLER);
+		PackageProduct pkg2 = new PackageProduct(null,LocalDate.of(2026, 9, 03),p1,center1, PackageStatus.CREATED_BY_SELLER);
 		center1.getPkgs().addAll(Arrays.asList(pkg1,pkg2));
 		center1.setQuantityPackages();
 		ctRepository.save(center1);

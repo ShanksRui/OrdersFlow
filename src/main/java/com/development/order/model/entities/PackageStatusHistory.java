@@ -6,21 +6,33 @@ import java.time.Instant;
 import com.development.order.model.entities.enums.PackageStatus;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class PackageStatusHistory  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@Enumerated(EnumType.STRING)
 	private PackageStatus status;
 	private Instant dataTime;
-	private Long packageProduct;
+	@ManyToOne
+	@JoinColumn(name = "packageProduct_id")
+	private PackageProduct packageProduct;
 	
 	public PackageStatusHistory() {
 		
 	}
 	
-	public PackageStatusHistory(Long id, PackageStatus status, Instant dataTime, Long packageProduct) {
+	public PackageStatusHistory(Long id, PackageStatus status, Instant dataTime, PackageProduct packageProduct) {
 		this.id = id;
 		this.status = status;
 		this.dataTime = dataTime;
@@ -39,7 +51,7 @@ public class PackageStatusHistory  implements Serializable{
 		return dataTime;
 	}
 
-	public Long getPackageProduct() {
+	public PackageProduct getPackageProduct() {
 		return packageProduct;
 	}
 
@@ -55,7 +67,7 @@ public class PackageStatusHistory  implements Serializable{
 		this.dataTime = dataTime;
 	}
 
-	public void setPackageProduct(Long packageProduct) {
+	public void setPackageProduct(PackageProduct packageProduct) {
 		this.packageProduct = packageProduct;
 	}
 }

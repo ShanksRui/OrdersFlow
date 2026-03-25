@@ -32,6 +32,9 @@ public class Shipping implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "center_id")
 	private Center center;
+	@OneToMany(mappedBy = "shipping")
+	private List<ShippingStatusHistory> historys = new ArrayList<>();
+
 
 	public Shipping() {
 

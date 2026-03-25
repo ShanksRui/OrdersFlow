@@ -2,6 +2,8 @@ package com.development.order.model.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.development.order.model.entities.enums.PackageStatus;
@@ -12,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class PackageProduct implements Serializable {
@@ -39,10 +42,15 @@ public class PackageProduct implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "order_id")
 	private Order order;
+	@OneToMany(mappedBy = "packageProduct")
+	private List<PackageStatusHistory> historys = new ArrayList<>();
+	
 	private LocalDate dataPrevist;
 	private PackageStatus status;
 	private boolean WeightResultValidation;
 	private Double weightDeclared;
+	
+	
 
 	public PackageProduct() {
 	}

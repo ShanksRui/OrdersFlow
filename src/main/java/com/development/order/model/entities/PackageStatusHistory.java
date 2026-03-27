@@ -32,11 +32,9 @@ public class PackageStatusHistory  implements Serializable{
 		
 	}
 	
-	public PackageStatusHistory(Long id, PackageStatus status, Instant dataTime, PackageProduct packageProduct) {
+	public PackageStatusHistory(Long id, Instant dataTime) {
 		this.id = id;
-		this.status = status;
 		this.dataTime = dataTime;
-		this.packageProduct = packageProduct;
 	}
 
 	public Long getId() {

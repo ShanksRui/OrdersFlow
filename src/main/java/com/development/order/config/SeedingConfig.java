@@ -16,6 +16,7 @@ import com.development.order.model.entities.PackageProduct;
 import com.development.order.model.entities.Product;
 import com.development.order.model.entities.Seller;
 import com.development.order.model.entities.Shipping;
+import com.development.order.model.entities.ShippingStatusHistory;
 import com.development.order.model.entities.enums.PackageStatus;
 import com.development.order.model.entities.enums.ShippingStatus;
 import com.development.order.repositories.CenterRepository;
@@ -69,6 +70,7 @@ public class SeedingConfig implements CommandLineRunner {
 		
 		Center center1 = new Center(null,800);
 		Shipping ship = new Shipping(null, "Bags", "Brasilia","Sao-Paulo", ShippingStatus.CREATED,center1);
+		ship.addHistoryStatus(new ShippingStatusHistory(null, Instant.now()));
 		ctRepository.save(center1);
 		shipRepository.save(ship);
 		PackageProduct pkg1 = new PackageProduct(null,LocalDate.of(2026, 10, 12),p4,center1, PackageStatus.CREATED_BY_SELLER);

@@ -7,7 +7,10 @@ import java.util.Objects;
 
 import com.development.order.model.entities.enums.ShippingStatus;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,11 +31,12 @@ public class Shipping implements Serializable {
 	private List<PackageProduct> pkgs = new ArrayList<>();
 	private String localdeparture;
 	private String localDestinity;
+	@Enumerated(EnumType.STRING)
 	private ShippingStatus status;
 	@ManyToOne
 	@JoinColumn(name = "center_id")
 	private Center center;
-	@OneToMany(mappedBy = "shipping")
+	@OneToMany(mappedBy = "shipping", cascade = CascadeType.ALL)
 	private List<ShippingStatusHistory> historys = new ArrayList<>();
 
 
@@ -107,12 +111,21 @@ public class Shipping implements Serializable {
 	public void setStatus(ShippingStatus status) {
 		this.status = status;
 	}
+	
+	public List<ShippingStatusHistory> getHistory(){
+		return historys;
+	}
+	public void addHistoryStatus(ShippingStatusHistory status) {
+		status.setStatus(getStatus());
+		status.setShipping(this);
+		historys.add(status);
+	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

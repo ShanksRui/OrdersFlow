@@ -33,11 +33,9 @@ public class ShippingStatusHistory implements Serializable{
 		
 	}
 	
-	public ShippingStatusHistory(Long id, ShippingStatus status, Instant dataTime, Shipping shipping) {
+	public ShippingStatusHistory(Long id, Instant dataTime) {
 		this.id = id;
-		this.status = status;
 		this.dataTime = dataTime;
-		this.shipping = shipping;
 	}
 
 	public Long getId() {

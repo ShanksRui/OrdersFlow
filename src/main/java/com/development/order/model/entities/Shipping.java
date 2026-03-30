@@ -50,6 +50,7 @@ public class Shipping implements Serializable {
 		this.name = name;
 		this.localdeparture = localdeparture;
 		this.localDestinity = localDestinity;
+		this.status = status;
 		this.center = center;
 	}
 
@@ -115,10 +116,13 @@ public class Shipping implements Serializable {
 	public List<ShippingStatusHistory> getHistory(){
 		return historys;
 	}
-	public void addHistoryStatus(ShippingStatusHistory status) {
-		status.setStatus(getStatus());
-		status.setShipping(this);
-		historys.add(status);
+	public void addHistoryStatus(ShippingStatusHistory history) {
+		if (getStatus() == null) {
+			throw new IllegalStateException("shipping status must be defined before registering history");
+		}
+		history.setStatus(getStatus());
+		history.setShipping(this);
+		historys.add(history);
 	}
 
 	@Override

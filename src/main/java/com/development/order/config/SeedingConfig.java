@@ -13,6 +13,7 @@ import com.development.order.model.entities.Center;
 import com.development.order.model.entities.Client;
 import com.development.order.model.entities.Order;
 import com.development.order.model.entities.PackageProduct;
+import com.development.order.model.entities.PackageStatusHistory;
 import com.development.order.model.entities.Product;
 import com.development.order.model.entities.Seller;
 import com.development.order.model.entities.Shipping;
@@ -75,6 +76,7 @@ public class SeedingConfig implements CommandLineRunner {
 		shipRepository.save(ship);
 		PackageProduct pkg1 = new PackageProduct(null,LocalDate.of(2026, 10, 12),p4,center1, PackageStatus.CREATED_BY_SELLER);
 		PackageProduct pkg2 = new PackageProduct(null,LocalDate.of(2026, 9, 03),p1,center1, PackageStatus.CREATED_BY_SELLER);
+		pkg1.addHistoryStatus(new PackageStatusHistory(null, Instant.now()));
 		center1.getPkgs().addAll(Arrays.asList(pkg1,pkg2));
 		center1.setQuantityPackages();
 		ctRepository.save(center1);

@@ -8,6 +8,7 @@ import java.util.Objects;
 
 import com.development.order.model.entities.enums.PackageStatus;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -42,7 +43,7 @@ public class PackageProduct implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "order_id")
 	private Order order;
-	@OneToMany(mappedBy = "packageProduct")
+	@OneToMany(mappedBy = "packageProduct" ,cascade = CascadeType.ALL)
 	private List<PackageStatusHistory> historys = new ArrayList<>();
 	
 	private LocalDate dataPrevist;
@@ -70,6 +71,15 @@ public class PackageProduct implements Serializable {
 		this.status = status;
 		this.center = center;
 		this.dataPrevist = dataPrevist;
+	}
+	
+	public void addHistoryStatus(PackageStatusHistory psh) {
+		if (getStatus() == null) {
+			throw new IllegalStateException("shipping status must be defined before registering history");
+		}
+		psh.setStatus(status);
+		psh.setPackageProduct(this);
+		historys.add(psh);
 	}
 
 	public Shipping getShipping() {

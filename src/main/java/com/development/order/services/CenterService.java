@@ -1,11 +1,13 @@
 package com.development.order.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.development.order.model.entities.Center;
 import com.development.order.repositories.CenterRepository;
+import com.development.order.services.exceptions.NotFoundResourceException;
 
 @Service
 public class CenterService {
@@ -17,9 +19,6 @@ public class CenterService {
 	}
 
 	public void insert(Center center) {
-		if (repository.existsById(center.getId())) {
-			throw new IllegalArgumentException("already exitst ById in data Base");
-		}
 		repository.save(center);
 	}
 
@@ -27,9 +26,31 @@ public class CenterService {
 		return repository.findAll();
 	}
 
+	public Center findById(Long id) {
+		Optional<Center> op = repository.findById(id);
+		return op.orElseThrow(() -> new NotFoundResourceException(id));
+	}
+
+	public void delete(Long id) {
+		if (!repository.existsById(id)) {
+			throw new NotFoundResourceException(id);
+		}
+		repository.deleteById(id);
+	}
+	
+	public Center update(Center center, Long id) {
+		Center entity = findById(id);
+		dataUpdate(entity, center);
+		return repository.save(entity);
+	}
+	
+	private void dataUpdate(Center entity,Center center) {
+		entity.setLimitPackages(center.getLimitPackages());
+	}
+
 	public static Boolean validationWeight(Double weightDeclared, Double weightValited) {
 		if (weightDeclared > weightValited) {
-		  throw new IllegalArgumentException("weight is not at is limited");
+			throw new IllegalArgumentException("weight is not at is limited");
 		}
 		return true;
 	}

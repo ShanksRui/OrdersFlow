@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.development.order.model.dto.ClientDTO;
-import com.development.order.model.entities.Client;
 import com.development.order.services.ClientService;
 
 @RestController

@@ -2,9 +2,11 @@ package com.development.order.model.entities.enums;
 
 public enum ShippingStatus {
 
-	IN_STATE_TRANSPORT(1),
-	OUT_FOR_DELIVERY(2),
-	DELIVERED(3);
+	CREATED(1),
+	COLLECTING_PACKAGES(2),
+	IN_TRANSFERENCE(3),
+	OUT_FOR_DELIVERY(4),
+	DELIVERED(5);
 	
 	public int code;
 	

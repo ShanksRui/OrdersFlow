@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.development.order.model.dto.ShippingDTO;
+import com.development.order.model.dto.ShippingStatusHistoryDTO;
 import com.development.order.services.ShippingService;
 
 @RestController
@@ -29,4 +30,10 @@ private ShippingService service;
 		return ResponseEntity.ok().body(dtos);
 	}
 	
+	@GetMapping("/history")
+	public ResponseEntity<List<ShippingStatusHistoryDTO>> findAllHistory(){
+		List<ShippingStatusHistoryDTO> dtos = service.findHistoryStatus()
+				.stream().map(ShippingStatusHistoryDTO::new).collect(Collectors.toList());
+		return ResponseEntity.ok().body(dtos);
+	}
 }

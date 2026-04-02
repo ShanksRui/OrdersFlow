@@ -32,7 +32,7 @@ public class Order implements Serializable {
 	
 	@OneToMany(mappedBy = "order")
 	private List<PackageProduct> pkgs = new ArrayList<>();
-
+	
 	public Order () {
 		
 	}

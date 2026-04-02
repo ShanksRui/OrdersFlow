@@ -7,7 +7,10 @@ import java.util.Objects;
 
 import com.development.order.model.entities.enums.ShippingStatus;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,22 +30,27 @@ public class Shipping implements Serializable {
 	@OneToMany(mappedBy = "shipping")
 	private List<PackageProduct> pkgs = new ArrayList<>();
 	private String localdeparture;
-	private String localDestinity;
+	private String localDestination;
+	@Enumerated(EnumType.STRING)
 	private ShippingStatus status;
 	@ManyToOne
 	@JoinColumn(name = "center_id")
 	private Center center;
+	@OneToMany(mappedBy = "shipping", cascade = CascadeType.ALL)
+	private List<ShippingStatusHistory> historys = new ArrayList<>();
+
 
 	public Shipping() {
 
 	}
 
-	public Shipping(Long id, String name, String localdeparture, String localDestinity, ShippingStatus status,
+	public Shipping(Long id, String name, String localdeparture, String localDestination, ShippingStatus status,
 			Center center) {
 		this.id = id;
 		this.name = name;
 		this.localdeparture = localdeparture;
-		this.localDestinity = localDestinity;
+		this.localDestination = localDestination;
+		this.status = status;
 		this.center = center;
 	}
 
@@ -66,15 +74,15 @@ public class Shipping implements Serializable {
 	}
 
 	public String getLocalDestinity() {
-		return localDestinity;
+		return localDestination;
 	}
 
 	public void setLocaldeparture(String localdeparture) {
 		this.localdeparture = localdeparture;
 	}
 
-	public void setLocalDestinity(String localDestinity) {
-		this.localDestinity = localDestinity;
+	public void setLocalDestinity(String localDestination) {
+		this.localDestination = localDestination;
 	}
 
 	public Long getId() {
@@ -104,12 +112,24 @@ public class Shipping implements Serializable {
 	public void setStatus(ShippingStatus status) {
 		this.status = status;
 	}
+	
+	public List<ShippingStatusHistory> getHistory(){
+		return historys;
+	}
+	public void addHistoryStatus(ShippingStatusHistory history) {
+		if (getStatus() == null) {
+			throw new IllegalStateException("shipping status must be defined before registering history");
+		}
+		history.setStatus(getStatus());
+		history.setShipping(this);
+		historys.add(history);
+	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

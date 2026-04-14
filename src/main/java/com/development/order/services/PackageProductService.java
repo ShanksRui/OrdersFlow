@@ -1,11 +1,13 @@
 package com.development.order.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.development.order.model.entities.PackageProduct;
 import com.development.order.repositories.PackageProductRepository;
+import com.development.order.services.exceptions.NotFoundResourceException;
 
 @Service
 public class PackageProductService {
@@ -24,5 +26,16 @@ public class PackageProductService {
 	}
 	public List<PackageProduct> findAll() {
 		return repository.findAll();
+	}
+	public PackageProduct findById(Long id) {
+		Optional<PackageProduct> op = repository.findById(id);
+		return op.orElseThrow(() -> new NotFoundResourceException(id));
+	}
+
+	public void delete(Long id) {
+		if (!repository.existsById(id)) {
+			throw new NotFoundResourceException(id);
+		}
+		repository.deleteById(id);
 	}
 }

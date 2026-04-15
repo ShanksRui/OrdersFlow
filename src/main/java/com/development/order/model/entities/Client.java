@@ -1,16 +1,12 @@
 package com.development.order.model.entities;
 
 import java.io.Serializable;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,9 +21,7 @@ public class Client implements Serializable {
 	private String name;
 	private Integer cpf;
 	private Integer cep;
-	@OneToMany(mappedBy = "client")
-	private List<PackageProduct> pkgs = new ArrayList<>();
-
+	
 	public Client() {
 
 	}
@@ -39,9 +33,6 @@ public class Client implements Serializable {
 		this.cep = cep;
 	}
 
-	public List<PackageProduct> getPkgs(){
-		return pkgs;
-	}
 	public Long getId() {
 		return id;
 	}

@@ -13,7 +13,6 @@ public class InfoPackageDTO {
 	
 	
 	public InfoPackageDTO(PackageProduct pkg) {
-		this.client = pkg.getClient().getId();
 		this.seller = pkg.getSeller().getId();
 		this.product = pkg.getProduct().getId();
 		this.center = pkg.getCenter().getId();

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.development.order.model.entities.enums.PackageStatus;
+import com.development.order.services.exceptions.NotFoundResourceException;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -26,9 +27,6 @@ public class PackageProduct implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@ManyToOne
-	@JoinColumn(name = "client_id")
-	private Client client;
-	@ManyToOne
 	@JoinColumn(name = "seller_id")
 	private Seller seller;
 	@ManyToOne
@@ -43,15 +41,13 @@ public class PackageProduct implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "order_id")
 	private Order order;
-	@OneToMany(mappedBy = "packageProduct" ,cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "packageProduct", cascade = CascadeType.ALL)
 	private List<PackageStatusHistory> historys = new ArrayList<>();
-	
+
 	private LocalDate dataPrevist;
 	private PackageStatus status;
 	private boolean WeightResultValidation;
 	private Double weightDeclared;
-	
-	
 
 	public PackageProduct() {
 	}
@@ -72,7 +68,7 @@ public class PackageProduct implements Serializable {
 		this.center = center;
 		this.dataPrevist = dataPrevist;
 	}
-	
+
 	public void addHistoryStatus(PackageStatusHistory psh) {
 		if (getStatus() == null) {
 			throw new IllegalStateException("shipping status must be defined before registering history");
@@ -118,10 +114,6 @@ public class PackageProduct implements Serializable {
 		return id;
 	}
 
-	public Client getClient() {
-		return client;
-	}
-
 	public Seller getSeller() {
 		return seller;
 	}
@@ -142,11 +134,10 @@ public class PackageProduct implements Serializable {
 		this.id = id;
 	}
 
-	public void setClient(Client client) {
-		this.client = client;
-	}
-
 	public void setSeller(Product product) {
+		if (product == null)
+			throw new NotFoundResourceException("product cannot be null");
+		this.product = product;
 		this.seller = product.getSeller();
 	}
 

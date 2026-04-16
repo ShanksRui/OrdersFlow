@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.development.order.model.dto.ClientDTO;
 import com.development.order.model.entities.Client;
 import com.development.order.repositories.ClientRepository;
 import com.development.order.services.exceptions.NotFoundResourceException;
@@ -38,10 +39,11 @@ public class ClientService {
 		repository.deleteById(id);
 	}
 
-	public Client update(Client client, Long id) {
+	public ClientDTO update(Client client, Long id) {
 		Client entity = findByID(id);
 		dataUpdate(entity, client);
-		return repository.save(entity);
+		repository.save(entity);
+		return new ClientDTO(entity);
 
 	}
 

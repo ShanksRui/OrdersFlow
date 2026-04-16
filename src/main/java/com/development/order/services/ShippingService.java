@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.development.order.model.dto.ShippingDTO;
 import com.development.order.model.entities.Shipping;
 import com.development.order.model.entities.ShippingStatusHistory;
 import com.development.order.repositories.ShippingRepository;
@@ -36,10 +37,11 @@ public class ShippingService {
 		repository.deleteById(id);
 	}
 
-	public Shipping update(Long id, Shipping shipping) {
+	public ShippingDTO update(Long id, Shipping shipping) {
 		Shipping entity = findById(id);
 		dataUpdate(entity, shipping);
-		return repository.save(entity);
+		repository.save(entity);
+		return new ShippingDTO(entity);
 	}
 
 	public void dataUpdate(Shipping entity, Shipping shipping) {

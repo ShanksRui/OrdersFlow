@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.development.order.model.dto.OrderDTO;
 import com.development.order.model.entities.Order;
 import com.development.order.repositories.OrderRepository;
 import com.development.order.services.exceptions.NotFoundResourceException;
@@ -41,10 +42,11 @@ public class OrderService {
 		repository.deleteById(id);
 	}
 
-	public Order update(Long id, Order order) {
+	public OrderDTO update(Long id, Order order) {
 		Order entity = findById(id);
 		dataUpdate(entity, order);
-		return repository.save(entity);
+		repository.save(entity);
+		return new OrderDTO(entity);
 	}
 
 	public void dataUpdate(Order entity, Order order) {

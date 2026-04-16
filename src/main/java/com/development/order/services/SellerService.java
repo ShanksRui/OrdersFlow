@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.development.order.model.dto.SellerDTO;
 import com.development.order.model.entities.Seller;
 import com.development.order.repositories.SellerRepository;
 import com.development.order.services.exceptions.NotFoundResourceException;
@@ -39,10 +40,11 @@ private SellerRepository repository;
 		repository.deleteById(id);
 	}
 
-	public Seller update(Long id, Seller seller) {
+	public SellerDTO update(Long id, Seller seller) {
 		Seller entity = findById(id);
 		dataUpdate(entity, seller);
-		return repository.save(entity);
+		repository.save(entity);
+		return new SellerDTO(entity);
 	}
 
 	public void dataUpdate(Seller entity, Seller seller) {

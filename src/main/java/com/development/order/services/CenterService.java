@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.development.order.model.dto.CenterDTO;
 import com.development.order.model.entities.Center;
 import com.development.order.repositories.CenterRepository;
 import com.development.order.services.exceptions.NotFoundResourceException;
@@ -38,10 +39,11 @@ public class CenterService {
 		repository.deleteById(id);
 	}
 	
-	public Center update(Center center, Long id) {
+	public CenterDTO update(Center center, Long id) {
 		Center entity = findById(id);
 		dataUpdate(entity, center);
-		return repository.save(entity);
+		repository.save(entity);
+		return new CenterDTO(entity);
 	}
 	
 	private void dataUpdate(Center entity,Center center) {

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.development.order.model.dto.PackageProductDTO;
 import com.development.order.model.entities.PackageProduct;
 import com.development.order.repositories.PackageProductRepository;
 import com.development.order.services.exceptions.NotFoundResourceException;
@@ -37,5 +38,15 @@ public class PackageProductService {
 			throw new NotFoundResourceException(id);
 		}
 		repository.deleteById(id);
+	}
+	public PackageProductDTO update(Long id,PackageProduct pkg) {
+		PackageProduct entity = findById(id);
+		dataUpdate(entity, pkg);
+		return new PackageProductDTO(entity);
+	}
+	public void dataUpdate(PackageProduct entity,PackageProduct pkg) {
+		entity.setDataPrevist(pkg.getDataPrevist());
+		entity.setWeightResultValidaton(pkg.getWeightResultValidation());
+		entity.setShipping(pkg.getShipping());
 	}
 }

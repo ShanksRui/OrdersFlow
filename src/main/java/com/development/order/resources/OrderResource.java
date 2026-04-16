@@ -44,8 +44,8 @@ public class OrderResource {
 	}
 
 	@PatchMapping("/{id}")
-	public ResponseEntity<OrderDTO> update(@PathVariable Long id, @RequestBody Order Order) {
-		OrderDTO dto = service.update(id, Order);
+	public ResponseEntity<OrderDTO> update(@PathVariable Long id, @RequestBody Order order) {
+		OrderDTO dto = service.update(id, order);
 		return ResponseEntity.ok().body(dto);
 	}
 }

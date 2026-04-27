@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,13 +33,13 @@ public class PackageProductResource {
 				.stream().map(PackageProductDTO::new).collect(Collectors.toList());
 		return ResponseEntity.ok().body(dtos);
 	}
-	@GetMapping(value = "/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<PackageProductDTO> findById(@PathVariable Long id) {
 		PackageProductDTO dto = new PackageProductDTO(service.findById(id));
 		return ResponseEntity.ok().body(dto);
 	}
 
-	@GetMapping("/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();

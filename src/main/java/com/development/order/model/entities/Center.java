@@ -11,15 +11,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
-
 @Entity
-public class Center implements Serializable{
+public class Center implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String name;
 	private Integer quantityPackages;
 	private Integer limitPackages;
 	@OneToMany(mappedBy = "center")
@@ -32,11 +32,13 @@ public class Center implements Serializable{
 
 	}
 
-	public Center(Long id,Integer limitPackages) {
+	public Center(Long id, String name, Integer limitPackages) {
+		this.name = name;
 		this.id = id;
 		this.setLimitPackages(limitPackages);
 	}
-	public List<PackageProduct> getPkgs(){
+
+	public List<PackageProduct> getPkgs() {
 		return pkgs;
 	}
 
@@ -55,7 +57,7 @@ public class Center implements Serializable{
 	public void setQuantityPackages() {
 		this.quantityPackages = pkgs.size();
 	}
-	
+
 	public Integer getLimitPackages() {
 		return limitPackages;
 	}
@@ -63,7 +65,15 @@ public class Center implements Serializable{
 	public void setLimitPackages(Integer limitPackages) {
 		this.limitPackages = limitPackages;
 	}
-	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

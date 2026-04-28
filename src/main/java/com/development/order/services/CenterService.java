@@ -5,7 +5,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.development.order.model.dto.CenterDTO;
+import com.development.order.model.dto.request.CenterRequestDTO;
+import com.development.order.model.dto.response.CenterDTO;
 import com.development.order.model.entities.Center;
 import com.development.order.repositories.CenterRepository;
 import com.development.order.services.exceptions.NotFoundResourceException;
@@ -19,8 +20,11 @@ public class CenterService {
 		this.repository = repository;
 	}
 
-	public void insert(Center center) {
-		repository.save(center);
+	public Center insert(CenterRequestDTO dto) {
+		Center center = new Center();
+		center.setName(dto.getName());
+		center.setLimitPackages(dto.getLimitPackages());
+		return repository.save(center);
 	}
 
 	public List<Center> findAll() {

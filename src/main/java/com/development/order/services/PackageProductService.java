@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.development.order.model.dto.PackageProductDTO;
+import com.development.order.model.dto.response.PackageProductDTO;
 import com.development.order.model.entities.PackageProduct;
 import com.development.order.repositories.PackageProductRepository;
 import com.development.order.services.exceptions.NotFoundResourceException;

@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.development.order.model.dto.ShippingDTO;
-import com.development.order.model.dto.ShippingStatusHistoryDTO;
+import com.development.order.model.dto.response.ShippingDTO;
+import com.development.order.model.dto.response.ShippingStatusHistoryDTO;
 import com.development.order.model.entities.Shipping;
 import com.development.order.services.ShippingService;
 

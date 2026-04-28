@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.development.order.model.dto.PackageProductDTO;
+import com.development.order.model.dto.response.PackageProductDTO;
 import com.development.order.model.entities.PackageProduct;
 import com.development.order.services.PackageProductService;
 

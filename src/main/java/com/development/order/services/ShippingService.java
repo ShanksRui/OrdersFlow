@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.development.order.model.dto.ShippingDTO;
+import com.development.order.model.dto.response.ShippingDTO;
 import com.development.order.model.entities.Shipping;
 import com.development.order.model.entities.ShippingStatusHistory;
 import com.development.order.repositories.ShippingRepository;

@@ -1,10 +1,11 @@
-package com.development.order.model.dto;
+package com.development.order.model.dto.response;
 
 import com.development.order.model.entities.Center;
 
 public class CenterDTO {
 
 	private Long id;
+	private String name;
 	private Integer quantityPackages;
 	private Integer limitPackages;
 	
@@ -13,6 +14,7 @@ public class CenterDTO {
 	}
 	
 	public CenterDTO(Center center) {
+		this.name = center.getName();
 		this.id = center.getId();
 		this.quantityPackages = center.getQuantityPackages();
 		this.limitPackages = center.getLimitPackages();
@@ -40,5 +42,13 @@ public class CenterDTO {
 
 	public void setLimitPackages(Integer limitPackages) {
 		this.limitPackages = limitPackages;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

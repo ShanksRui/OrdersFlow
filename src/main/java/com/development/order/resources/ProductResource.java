@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.development.order.model.dto.ProductDTO;
+import com.development.order.model.dto.response.ProductDTO;
 import com.development.order.model.entities.Product;
 import com.development.order.services.ProductService;
 
@@ -32,7 +32,7 @@ public class ProductResource {
 				.stream().map(ProductDTO::new).collect(Collectors.toList());
 		return ResponseEntity.ok().body(dtos);
 	}
-	@GetMapping(value = "/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
 		ProductDTO dto = new ProductDTO(service.findById(id));
 		return ResponseEntity.ok().body(dto);

@@ -69,7 +69,7 @@ public class SeedingConfig implements CommandLineRunner {
 		Client c2 = new Client(null, "pamella", 625353242, 43532345);
 		cRepository.saveAll(Arrays.asList(c1,c2));
 		
-		Center center1 = new Center(null,800);
+		Center center1 = new Center(null,"Station",800);
 		Shipping ship = new Shipping(null, "Bags", "Brasilia","Sao-Paulo", ShippingStatus.CREATED,center1);
 		ship.addHistoryStatus(new ShippingStatusHistory(null, Instant.now()));
 		ctRepository.save(center1);

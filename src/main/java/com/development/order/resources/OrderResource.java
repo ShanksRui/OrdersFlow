@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.development.order.model.dto.OrderDTO;
+import com.development.order.model.dto.response.OrderDTO;
 import com.development.order.model.entities.Order;
 import com.development.order.services.OrderService;
 

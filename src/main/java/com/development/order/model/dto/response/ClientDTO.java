@@ -1,4 +1,4 @@
-package com.development.order.model.dto;
+package com.development.order.model.dto.response;
 
 import com.development.order.model.entities.Client;
 
@@ -10,7 +10,7 @@ public class ClientDTO {
 	
 	public ClientDTO() {
 		
-	};
+	}
 
 	public ClientDTO(Client client) {
 		this.id = client.getId();

@@ -5,7 +5,8 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.development.order.model.dto.ClientDTO;
+import com.development.order.model.dto.request.ClientRequestDTO;
+import com.development.order.model.dto.response.ClientDTO;
 import com.development.order.model.entities.Client;
 import com.development.order.repositories.ClientRepository;
 import com.development.order.services.exceptions.NotFoundResourceException;
@@ -18,9 +19,15 @@ public class ClientService {
 	public ClientService(ClientRepository repository) {
 		this.repository = repository;
 	}
+	
 
-	public void insert(Client client) {
-		repository.save(client);
+	public Client insert(ClientRequestDTO client) {
+		Client c = new Client();
+		c.setName(client.getName());
+		c.setCpf(client.getCpf());
+		c.setLocality(client.getLocality());
+		return repository.save(c);
+	    
 	}
 
 	public List<Client> findAll() {

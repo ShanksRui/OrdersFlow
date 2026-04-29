@@ -74,19 +74,21 @@ public class SeedingConfig implements CommandLineRunner {
 		ship.addHistoryStatus(new ShippingStatusHistory(null, Instant.now()));
 		ctRepository.save(center1);
 		shipRepository.save(ship);
-		PackageProduct pkg1 = new PackageProduct(null,LocalDate.of(2026, 10, 12),p4,center1, PackageStatus.CREATED_BY_SELLER);
-		PackageProduct pkg2 = new PackageProduct(null,LocalDate.of(2026, 9, 03),p1,center1, PackageStatus.CREATED_BY_SELLER);
+		PackageProduct pkg1 = new PackageProduct(null,6.4,LocalDate.of(2026, 10, 12),p4,center1, PackageStatus.CREATED_BY_SELLER);
+		PackageProduct pkg2 = new PackageProduct(null,24.0,LocalDate.of(2026, 9, 03),p1,center1, PackageStatus.CREATED_BY_SELLER);
 		pkg1.addHistoryStatus(new PackageStatusHistory(null, Instant.now()));
 		center1.getPkgs().addAll(Arrays.asList(pkg1,pkg2));
 		center1.setQuantityPackages();
 		ctRepository.save(center1);
 		pkg1.setShipping(ship);
 		pkg2.setShipping(ship);
+		
 		pkgRepository.saveAll(Arrays.asList(pkg1,pkg2));
 		ship.getPkgs().addAll(Arrays.asList(pkg1,pkg2));
+		shipRepository.save(ship);
 		
-		Order o1 = new Order(null, Instant.now(),c2);
-		Order o2 = new Order(null, Instant.now(),c1);
+		Order o1 = new Order(null,c2);
+		Order o2 = new Order(null,c1);
 		o1.addPackage(pkg2);
 		o2.addPackage(pkg1);
 		oRepository.saveAll(Arrays.asList(o1,o2));

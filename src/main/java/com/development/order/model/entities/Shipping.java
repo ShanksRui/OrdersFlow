@@ -38,7 +38,7 @@ public class Shipping implements Serializable {
 	private Center center;
 	@OneToMany(mappedBy = "shipping", cascade = CascadeType.ALL)
 	private List<ShippingStatusHistory> historys = new ArrayList<>();
-
+	private Double price = 19.00;
 
 	public Shipping() {
 
@@ -112,10 +112,19 @@ public class Shipping implements Serializable {
 	public void setStatus(ShippingStatus status) {
 		this.status = status;
 	}
-	
-	public List<ShippingStatusHistory> getHistory(){
+
+	public List<ShippingStatusHistory> getHistory() {
 		return historys;
 	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+	      this.price = price;
+	}
+
 	public void addHistoryStatus(ShippingStatusHistory history) {
 		if (getStatus() == null) {
 			throw new IllegalStateException("shipping status must be defined before registering history");
@@ -124,12 +133,13 @@ public class Shipping implements Serializable {
 		history.setShipping(this);
 		historys.add(history);
 	}
+	
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

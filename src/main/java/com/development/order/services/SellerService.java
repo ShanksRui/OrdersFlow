@@ -13,21 +13,26 @@ import com.development.order.services.exceptions.NotFoundResourceException;
 @Service
 public class SellerService {
 
-private SellerRepository repository;
-	
+	private SellerRepository repository;
+
 	public SellerService(SellerRepository repository) {
 		this.repository = repository;
 	}
-	
-	public void insert(Seller seller) {
-		if(repository.existsById(seller.getId())) {
+
+	public Seller insert(SellerDTO seller) {
+		if (repository.existsById(seller.getId())) {
 			throw new IllegalArgumentException("already exitst ById in data Base");
 		}
-		repository.save(seller);
+		Seller s = new Seller();
+		s.setName(seller.getName());
+		s.setCnpj(seller.getCnpj());
+		return repository.save(s);
 	}
+
 	public List<Seller> findAll() {
 		return repository.findAll();
 	}
+
 	public Seller findById(Long id) {
 		Optional<Seller> op = repository.findById(id);
 		return op.orElseThrow(() -> new NotFoundResourceException(id));
@@ -53,4 +58,3 @@ private SellerRepository repository;
 
 	}
 }
-

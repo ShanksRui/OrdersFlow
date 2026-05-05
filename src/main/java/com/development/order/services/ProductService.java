@@ -19,11 +19,16 @@ private ProductRepository repository;
 		this.repository = repository;
 	}
 	
-	public void insert(Product product) {
+	public Product insert(ProductDTO product) {
 		if(repository.existsById(product.getId())) {
 			throw new IllegalArgumentException("already exitst ById in data Base");
 		}
-		repository.save(product);
+		Product p = new Product();
+		p.setName(product.getName());
+		p.setPrice(product.getPrice());
+		p.setType(product.getType());
+		
+		return repository.save(p);
 	}
 	public List<Product> findAll() {
 		return repository.findAll();

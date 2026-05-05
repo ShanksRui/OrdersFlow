@@ -22,6 +22,7 @@ public class ClientService {
 	
 
 	public Client insert(ClientRequestDTO client) {
+		
 		Client c = new Client();
 		c.setName(client.getName());
 		c.setCpf(client.getCpf());

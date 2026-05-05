@@ -46,7 +46,6 @@ public class PackageProductService {
 	}
 	public void dataUpdate(PackageProduct entity,PackageProduct pkg) {
 		entity.setDataPrevist(pkg.getDataPrevist());
-		entity.setWeightResultValidaton(pkg.getWeightResultValidation());
 		entity.setShipping(pkg.getShipping());
 	}
 }

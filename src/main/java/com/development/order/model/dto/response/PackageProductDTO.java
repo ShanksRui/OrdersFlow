@@ -2,6 +2,7 @@ package com.development.order.model.dto.response;
 
 import java.time.LocalDate;
 
+import com.development.order.calculate.CalcTax;
 import com.development.order.model.entities.PackageProduct;
 import com.development.order.model.entities.enums.PackageStatus;
 
@@ -62,5 +63,8 @@ public class PackageProductDTO {
 
 	public void setInfo(InfoPackageDTO info) {
 		this.info = info;
+	}
+	public Double getPriceTotal() {
+		return CalcTax.valueTotal(this);
 	}
 }

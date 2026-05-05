@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.development.order.calculate.CalcTax;
+import com.development.order.model.entities.enums.FreightRange;
 import com.development.order.model.entities.enums.PackageStatus;
 import com.development.order.services.exceptions.NotFoundResourceException;
 
@@ -47,7 +49,6 @@ public class PackageProduct implements Serializable {
 	private LocalDate dataPrevist;
 	private PackageStatus status;
 	private Double weightDeclared;
-	private Double priceTotal;
 
 	public PackageProduct() {
 	}
@@ -103,7 +104,7 @@ public class PackageProduct implements Serializable {
 	public Double getWeightDeclared() {
 		return weightDeclared;
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -150,15 +151,8 @@ public class PackageProduct implements Serializable {
 	public void setDataPrevist(LocalDate dataPrevist) {
 		this.dataPrevist = dataPrevist;
 	}
-
-	public Double getPrince() {
-		return priceTotal;
-	}
-
-	public void setPrince(Double priceTotal) {
-		this.priceTotal = priceTotal;
-	}
-
+	
+  
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

@@ -23,6 +23,7 @@ public class Product implements Serializable{
 	private Long id;
 	
 	private String name;
+	private Integer code;
 	private Double price;
 	private String type;
 	@ManyToOne

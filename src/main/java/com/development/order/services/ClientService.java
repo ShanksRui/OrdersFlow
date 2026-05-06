@@ -22,7 +22,9 @@ public class ClientService {
 	
 
 	public Client insert(ClientRequestDTO client) {
-		
+		if (repository.exexistsBycpf(client.getCpf())) {
+			throw new IllegalArgumentException("already exitst ById in data Base");
+		}
 		Client c = new Client();
 		c.setName(client.getName());
 		c.setCpf(client.getCpf());

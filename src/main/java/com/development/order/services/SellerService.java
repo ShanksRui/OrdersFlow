@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.development.order.model.dto.request.SellerRequestDTO;
 import com.development.order.model.dto.response.SellerDTO;
 import com.development.order.model.entities.Seller;
 import com.development.order.repositories.SellerRepository;
@@ -19,8 +20,8 @@ public class SellerService {
 		this.repository = repository;
 	}
 
-	public Seller insert(SellerDTO seller) {
-		if (repository.existsById(seller.getId())) {
+	public Seller insert(SellerRequestDTO seller) {
+		if (repository.exexistsBycnpj(seller.getCnpj())) {
 			throw new IllegalArgumentException("already exitst ById in data Base");
 		}
 		Seller s = new Seller();

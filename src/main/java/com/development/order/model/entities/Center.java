@@ -20,6 +20,7 @@ public class Center implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
+	private Integer cnpj;
 	private Integer quantityPackages;
 	private Integer limitPackages;
 	@OneToMany(mappedBy = "center")
@@ -32,10 +33,11 @@ public class Center implements Serializable {
 
 	}
 
-	public Center(Long id, String name, Integer limitPackages) {
+	public Center(Long id, String name,Integer cnpj, Integer limitPackages) {
 		this.name = name;
 		this.id = id;
 		this.setLimitPackages(limitPackages);
+		this.setCnpj(cnpj);
 	}
 
 	public List<PackageProduct> getPkgs() {
@@ -73,6 +75,14 @@ public class Center implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public Integer getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(Integer cnpj) {
+		this.cnpj = cnpj;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -90,5 +100,4 @@ public class Center implements Serializable {
 		Center other = (Center) obj;
 		return Objects.equals(id, other.id);
 	}
-
 }

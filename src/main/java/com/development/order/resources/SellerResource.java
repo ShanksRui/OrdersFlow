@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.development.order.model.dto.request.SellerRequestDTO;
 import com.development.order.model.dto.response.SellerDTO;
 import com.development.order.model.entities.Seller;
 import com.development.order.services.SellerService;
@@ -29,7 +30,7 @@ public class SellerResource {
 		this.service = service;
 	}
 	@PostMapping
-	public ResponseEntity<SellerDTO> insert(@RequestBody SellerDTO seller){
+	public ResponseEntity<SellerDTO> insert(@RequestBody SellerRequestDTO seller){
 		Seller s = service.insert(seller);
 		
 	  URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")

@@ -6,6 +6,7 @@ public class CenterRequestDTO {
 
 	private String name;
 	private Integer limitPackages;
+	private Integer cnpj;
 
 	public CenterRequestDTO() {
 
@@ -14,6 +15,7 @@ public class CenterRequestDTO {
 	public CenterRequestDTO(Center center) {
 		this.name = center.getName();
 		this.limitPackages = center.getLimitPackages();
+		this.setCnpj(center.getCnpj());
 	}
 
 	public String getName() {
@@ -30,5 +32,13 @@ public class CenterRequestDTO {
 
 	public void setLimitPackages(Integer limitPackages) {
 		this.limitPackages = limitPackages;
+	}
+
+	public Integer getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(Integer cnpj) {
+		this.cnpj = cnpj;
 	}
 }

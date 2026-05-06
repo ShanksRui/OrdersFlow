@@ -27,6 +27,7 @@ public class Shipping implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
+	private Integer cnpj;
 	@OneToMany(mappedBy = "shipping")
 	private List<PackageProduct> pkgs = new ArrayList<>();
 	private String localdeparture;
@@ -44,7 +45,7 @@ public class Shipping implements Serializable {
 
 	}
 
-	public Shipping(Long id, String name, String localdeparture, String localDestination, ShippingStatus status,
+	public Shipping(Long id, String name,Integer cnpj, String localdeparture, String localDestination, ShippingStatus status,
 			Center center) {
 		this.id = id;
 		this.name = name;
@@ -52,6 +53,7 @@ public class Shipping implements Serializable {
 		this.localDestination = localDestination;
 		this.status = status;
 		this.center = center;
+		this.cnpj = cnpj;
 	}
 
 	public Center getCenter() {

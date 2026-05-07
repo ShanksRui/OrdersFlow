@@ -2,11 +2,13 @@ package com.development.order.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
 import com.development.order.model.dto.request.SellerRequestDTO;
 import com.development.order.model.dto.response.SellerDTO;
+import com.development.order.model.entities.Product;
 import com.development.order.model.entities.Seller;
 import com.development.order.repositories.SellerRepository;
 import com.development.order.services.exceptions.NotFoundResourceException;
@@ -21,7 +23,7 @@ public class SellerService {
 	}
 
 	public Seller insert(SellerRequestDTO seller) {
-		if (repository.exexistsBycnpj(seller.getCnpj())) {
+		if (repository.existsBycnpj(seller.getCnpj())) {
 			throw new IllegalArgumentException("already exitst ById in data Base");
 		}
 		Seller s = new Seller();

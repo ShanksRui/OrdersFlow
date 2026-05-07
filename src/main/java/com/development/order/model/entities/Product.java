@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.development.order.services.ProductService;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,7 +25,7 @@ public class Product implements Serializable{
 	private Long id;
 	
 	private String name;
-	private Integer code;
+	private String code;
 	private Double price;
 	private String type;
 	@ManyToOne
@@ -44,6 +46,7 @@ public class Product implements Serializable{
 		this.price = price;
 		this.type = type;
 		this.seller = seller;
+		setCode(ProductService.generatorFromCode());
 	}
 	
 	
@@ -106,6 +109,14 @@ public class Product implements Serializable{
 			return false;
 		Product other = (Product) obj;
 		return Objects.equals(id, other.id);
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 }

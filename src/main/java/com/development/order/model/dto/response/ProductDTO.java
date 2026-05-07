@@ -6,6 +6,7 @@ import com.development.order.model.entities.Seller;
 public class ProductDTO {
 
 	private Long id;
+    private String code;
 	private String name;
 	private Double price;
 	private String type;
@@ -21,6 +22,7 @@ public class ProductDTO {
 		this.price = product.getPrice();
 		this.type = product.getType();
 		setSeller(product.getSeller());
+		this.code = product.getCode();
 	}
 
 	public Long getId() {

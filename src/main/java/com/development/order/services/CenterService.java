@@ -21,7 +21,7 @@ public class CenterService {
 	}
 
 	public Center insert(CenterRequestDTO dto) {
-		if (repository.exexistsBycnpj(dto.getCnpj())) {
+		if (repository.existsBycnpj(dto.getCnpj())) {
 			throw new IllegalArgumentException("already exitst ById in data Base");
 		}
 		Center center = new Center();

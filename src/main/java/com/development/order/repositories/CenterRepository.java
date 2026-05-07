@@ -6,5 +6,5 @@ import com.development.order.model.entities.Center;
 
 public interface CenterRepository extends JpaRepository<Center, Long>{
 
-	boolean exexistsBycnpj(Integer cnpj);
+	boolean existsBycnpj(Integer cnpj);
 }

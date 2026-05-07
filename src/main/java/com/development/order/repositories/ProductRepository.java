@@ -6,4 +6,5 @@ import com.development.order.model.entities.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long>{
 
+	boolean existsBycode(String code);
 }

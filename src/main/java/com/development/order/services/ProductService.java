@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.development.order.model.dto.response.ProductDTO;
 import com.development.order.model.entities.Product;
 import com.development.order.repositories.ProductRepository;
+import com.development.order.services.exceptions.CodeExistingException;
 import com.development.order.services.exceptions.NotFoundResourceException;
 
 @Service
@@ -21,16 +23,21 @@ public class ProductService {
 	}
 
 	public Product insert(ProductDTO product) {
-		if (repository.existsById(product.getId())) {
-			throw new IllegalArgumentException("already exitst ById in data Base");
-		}
 		Product p = new Product();
 		p.setName(product.getName());
 		p.setPrice(product.getPrice());
 		p.setType(product.getType());
-		p.setCode(generatorFromCode());
+		for (int i = 0; i < 5; i++) {
+			String code = generatorFromCode();
+			p.setCode(code);
 
-		return repository.save(p);
+			try {
+				return repository.save(p);
+			} catch (DataIntegrityViolationException e) {
+				
+			}		
+		}
+		throw new CodeExistingException("error in generating for code unique");
 	}
 
 	public List<Product> findAll() {

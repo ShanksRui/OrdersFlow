@@ -6,8 +6,9 @@ import com.development.order.model.entities.enums.FreightRange;
 public interface CalcTax {
 
 	    static double valueTotal (PackageProductDTO packageProductDTO) {
-		Double price =FreightRange.calculate(packageProductDTO.getWeightDeclared());
-		Double tax = FreightRange.whichTax(packageProductDTO.getWeightDeclared());
+	    FreightRange f	= FreightRange.calculate(packageProductDTO.getWeightDeclared());
+		Double price = f.getPrice();
+		Double tax = f.getTax();
 		price += (price * tax);
 		return price;
 	}

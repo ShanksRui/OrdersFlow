@@ -9,6 +9,7 @@ import com.development.order.model.entities.enums.PackageStatus;
 public class PackageProductDTO {
 
 	private Long id;
+	private ProductDTO product;
 	private InfoPackageDTO info;
 	private LocalDate dataPrevist;
 	private PackageStatus status;
@@ -24,6 +25,7 @@ public class PackageProductDTO {
 		this.status = pkg.getStatus();
 		this.weightDeclared = pkg.getWeightDeclared();
 		info = new InfoPackageDTO(pkg);
+		this.product = new ProductDTO(pkg.getProduct());
 	}
 
 	public Long getId() {

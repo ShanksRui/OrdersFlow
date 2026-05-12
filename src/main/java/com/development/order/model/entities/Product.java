@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import com.development.order.services.ProductService;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,6 +26,7 @@ public class Product implements Serializable{
 	private Long id;
 	
 	private String name;
+	@Column(unique = true,nullable = false)
 	private String code;
 	private Double price;
 	private String type;

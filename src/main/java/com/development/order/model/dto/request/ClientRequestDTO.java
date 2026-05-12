@@ -1,7 +1,5 @@
 package com.development.order.model.dto.request;
 
-import com.development.order.model.entities.Client;
-
 public class ClientRequestDTO {
 
 	private String name;
@@ -11,10 +9,11 @@ public class ClientRequestDTO {
 	public ClientRequestDTO() {
 		
 	}
-	public ClientRequestDTO(Client client) {
-		setName(client.getName());
-		setCpf(client.getCpf());
-		setLocality(client.getLocality());
+	public ClientRequestDTO(String name,Integer cpf, Integer locality) {
+		this.name = name;
+		this.cpf = cpf;
+		this.locality = locality;
+		
 	}
 	public String getName() {
 		return name;

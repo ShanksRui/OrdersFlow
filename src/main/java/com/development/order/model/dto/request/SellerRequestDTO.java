@@ -1,7 +1,5 @@
 package com.development.order.model.dto.request;
 
-import com.development.order.model.entities.Seller;
-
 public class SellerRequestDTO {
 
 	private String name;
@@ -11,9 +9,9 @@ public class SellerRequestDTO {
 		
 	}
 	
-	public SellerRequestDTO(Seller seller) {
-		this.name = seller.getName();
-		this.cnpj = seller.getCnpj();
+	public SellerRequestDTO(String name, Integer cnpj) {
+		this.name = name;
+		this.cnpj = cnpj;
 	}
 
 	public String getName() {

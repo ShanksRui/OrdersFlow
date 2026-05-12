@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,28 +20,28 @@ import jakarta.persistence.Table;
 @Table(name = "tb_order")
 public class Order implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	@Column(unique = true, nullable = false)
+	private String code;
 	private Instant mommentBuy;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private Client client;
-	
 	@OneToMany(mappedBy = "order")
 	private List<PackageProduct> pkgs = new ArrayList<>();
-	
-	public Order () {
-		
+
+	public Order() {
+
 	}
-	
-	public Order(Long id,Client client) {
+
+	public Order(Long id, Client client) {
 		this.id = id;
 		this.client = client;
-		
+
 	}
 
 	public Long getId() {
@@ -58,11 +59,13 @@ public class Order implements Serializable {
 	public List<PackageProduct> getPkgs() {
 		return pkgs;
 	}
+
 	public void addPackage(PackageProduct pkg) {
-	     pkgs.add(pkg);
-	     pkg.setOrder(this);
-	     this.mommentBuy = Instant.now();
+		pkgs.add(pkg);
+		pkg.setOrder(this);
+		this.mommentBuy = Instant.now();
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -72,7 +75,15 @@ public class Order implements Serializable {
 	}
 
 	public void setClient(Client client) {
-		 this.client = client;
+		this.client = client;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	@Override
@@ -91,4 +102,5 @@ public class Order implements Serializable {
 		Order other = (Order) obj;
 		return Objects.equals(id, other.id);
 	}
+
 }

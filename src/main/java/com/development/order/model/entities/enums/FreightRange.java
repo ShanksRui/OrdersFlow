@@ -4,15 +4,15 @@ public enum FreightRange {
 
 	LIGHT(5.0, 10.0, 0.1), 
 	MEDIUM(10.0, 20.0, 0.15), 
-	HEAVY(25.0, 35.0, 0.2), 
+	HEAVY(20.0, 35.0, 0.2), 
 	EXTRA(Double.MAX_VALUE, 50.0, 0.2);
 
 	private Double maxHeight;
 	private Double price;
 	private Double tax;
 
-	FreightRange(Double maxHeight, Double price, Double tax) {
-		this.maxHeight = maxHeight;
+	FreightRange(Double maxWeight, Double price, Double tax) {
+		this.maxHeight = maxWeight;
 		this.price = price;
 		this.tax = tax;
 	}
@@ -29,19 +29,12 @@ public enum FreightRange {
 		return tax;
 	}
 
-	public static Double calculate(Double weight) {
+	public static FreightRange calculate(Double weight) {
 		for (FreightRange f : FreightRange.values())
 			if (weight <= f.getMaxWeight()) {
-				return f.getPrice();
+				return f;
 			}
-		return 0.0;
+		return EXTRA;
 	}
 
-	public static Double whichTax(Double w) {
-		for (FreightRange f : FreightRange.values())
-			if (w <= f.getMaxWeight()) {
-				return f.getTax();
-			}
-		return 0.0;
-	}
 }

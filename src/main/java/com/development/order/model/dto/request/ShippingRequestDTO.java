@@ -1,21 +1,18 @@
 package com.development.order.model.dto.request;
 
-import com.development.order.model.dto.response.CenterDTO;
-import com.development.order.model.entities.Center;
-import com.development.order.model.entities.Shipping;
-
 public class ShippingRequestDTO {
 
 	private String name;
 	private String localdeparture;
 	private String localDestinity;
-	private CenterDTO center;
-	
-	public ShippingRequestDTO(Shipping shipping) {
-		this.name = shipping.getName();
-		this.localdeparture = shipping.getLocaldeparture();
-		this.localDestinity = shipping.getLocalDestinity();
-		
+	private Long centerID;
+
+	public ShippingRequestDTO(String name, String localDeparture, String localDestinity, Long id) {
+		this.name = name;
+		this.localdeparture = localDeparture;
+		this.localDestinity = localDestinity;
+		this.centerID = id;
+
 	}
 
 	public String getName() {
@@ -30,10 +27,6 @@ public class ShippingRequestDTO {
 		return localDestinity;
 	}
 
-	public CenterDTO getCenter() {
-		return center;
-	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -46,8 +39,12 @@ public class ShippingRequestDTO {
 		this.localDestinity = localDestinity;
 	}
 
-	public void setCenter(Center center) {
-		this.center = new CenterDTO(center);
+	public Long getCenterID() {
+		return centerID;
 	}
-	
+
+	public void setCenterID(Long centerID) {
+		this.centerID = centerID;
+	}
+
 }

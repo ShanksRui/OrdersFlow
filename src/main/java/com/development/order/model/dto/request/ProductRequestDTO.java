@@ -1,7 +1,6 @@
 package com.development.order.model.dto.request;
 
 import com.development.order.model.dto.response.SellerDTO;
-import com.development.order.model.entities.Product;
 import com.development.order.model.entities.Seller;
 
 public class ProductRequestDTO {
@@ -9,17 +8,17 @@ public class ProductRequestDTO {
 	private String name;
 	private Double price;
 	private String type;
-	private SellerDTO seller;
-	
+	private Long sellerID;
+
 	public ProductRequestDTO() {
-		
+
 	}
-	
-	public ProductRequestDTO(Product product) {
-		this.name = product.getName();
-		this.price = product.getPrice();
-		this.type = product.getType();
-	
+
+	public ProductRequestDTO(String name, Double price, String type, Long sellerID) {
+		this.name = name;
+		this.price = price;
+		this.type = type;
+		this.setSellerID(sellerID);
 	}
 
 	public String getName() {
@@ -34,10 +33,6 @@ public class ProductRequestDTO {
 		return type;
 	}
 
-	public SellerDTO getSeller() {
-		return seller;
-	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -50,7 +45,11 @@ public class ProductRequestDTO {
 		this.type = type;
 	}
 
-	public void setSeller(Seller seller) {
-		this.seller = new SellerDTO(seller);
+	public Long getSellerID() {
+		return sellerID;
+	}
+
+	public void setSellerID(Long sellerID) {
+		this.sellerID = sellerID;
 	}
 }

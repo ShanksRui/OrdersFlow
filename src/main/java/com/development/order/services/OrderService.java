@@ -3,28 +3,43 @@ package com.development.order.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import com.development.order.model.dto.request.OrderRequestDTO;
 import com.development.order.model.dto.response.OrderDTO;
 import com.development.order.model.entities.Order;
 import com.development.order.repositories.OrderRepository;
+import com.development.order.services.exceptions.CodeExistingException;
 import com.development.order.services.exceptions.NotFoundResourceException;
 
 @Service
 public class OrderService {
 
 	private OrderRepository repository;
+	private ClientService service;
 
-	public OrderService(OrderRepository repository) {
+	public OrderService(OrderRepository repository,ClientService service) {
 		this.repository = repository;
+		this.service = service;
 	}
 
-	public void insert(Order order) {
-		if (repository.existsById(order.getId())) {
-			throw new IllegalArgumentException("already exitst ById in data Base");
+		public Order insert(OrderRequestDTO dto) {
+			Order order = new Order();
+			order.setClient(service.findByID(dto.getClientID()));
+			order.setMommentBuy(dto.getMommentBuy());
+			for (int i = 0; i < 5; i++) {
+				String code = ProductService.generatorFromCode();
+				order.setCode(code);
+
+				try {
+					return repository.save(order);
+				} catch (DataIntegrityViolationException e) {
+					System.out.println("generating new code!");
+				}		
+			}
+			throw new CodeExistingException("error in generating for code unique");
 		}
-		repository.save(order);
-	}
 
 	public List<Order> findAll() {
 		return repository.findAll();

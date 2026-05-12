@@ -34,7 +34,7 @@ public class ProductService {
 			try {
 				return repository.save(p);
 			} catch (DataIntegrityViolationException e) {
-				
+				System.out.println("generating new code!");
 			}		
 		}
 		throw new CodeExistingException("error in generating for code unique");

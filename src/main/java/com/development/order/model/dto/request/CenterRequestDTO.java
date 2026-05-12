@@ -1,7 +1,5 @@
 package com.development.order.model.dto.request;
 
-import com.development.order.model.entities.Center;
-
 public class CenterRequestDTO {
 
 	private String name;
@@ -12,10 +10,10 @@ public class CenterRequestDTO {
 
 	}
 
-	public CenterRequestDTO(Center center) {
-		this.name = center.getName();
-		this.limitPackages = center.getLimitPackages();
-		this.setCnpj(center.getCnpj());
+	public CenterRequestDTO(String name,Integer limitPackages,Integer cnpj) {
+		this.name = name;
+		this.limitPackages = limitPackages;
+		this.cnpj = cnpj;
 	}
 
 	public String getName() {

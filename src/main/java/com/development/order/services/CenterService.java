@@ -21,12 +21,12 @@ public class CenterService {
 	}
 
 	public Center insert(CenterRequestDTO dto) {
-		if (repository.existsBycnpj(dto.getCnpj())) {
+		if (repository.existsBycnpj(dto.cnpj())) {
 			throw new IllegalArgumentException("already exitst ById in data Base");
 		}
 		Center center = new Center();
-		center.setName(dto.getName());
-		center.setLimitPackages(dto.getLimitPackages());
+		center.setName(dto.name());
+		center.setLimitPackages(dto.limitPackages());
 		return repository.save(center);
 	}
 
@@ -50,7 +50,7 @@ public class CenterService {
 		Center entity = findById(id);
 		dataUpdate(entity, center);
 		repository.save(entity);
-		return new CenterDTO(entity);
+		return CenterDTO.fromDTO(entity);
 	}
 	
 	private void dataUpdate(Center entity,Center center) {

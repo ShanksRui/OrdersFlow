@@ -41,7 +41,7 @@ public class ShippingService {
 		Shipping entity = findById(id);
 		dataUpdate(entity, shipping);
 		repository.save(entity);
-		return new ShippingDTO(entity);
+		return ShippingDTO.fromDTO(entity);
 	}
 
 	public void dataUpdate(Shipping entity, Shipping shipping) {

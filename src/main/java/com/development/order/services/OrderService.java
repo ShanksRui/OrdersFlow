@@ -26,8 +26,8 @@ public class OrderService {
 
 		public Order insert(OrderRequestDTO dto) {
 			Order order = new Order();
-			order.setClient(service.findByID(dto.getClientID()));
-			order.setMommentBuy(dto.getMommentBuy());
+			order.setClient(service.findByID(dto.clientID()));
+			order.setMommentBuy(dto.mommentBuy());
 			for (int i = 0; i < 5; i++) {
 				String code = ProductService.generatorFromCode();
 				order.setCode(code);
@@ -61,7 +61,7 @@ public class OrderService {
 		Order entity = findById(id);
 		dataUpdate(entity, order);
 		repository.save(entity);
-		return new OrderDTO(entity);
+		return OrderDTO.fromDTO(entity);
 	}
 
 	public void dataUpdate(Order entity, Order order) {

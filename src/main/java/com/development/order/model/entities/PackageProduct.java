@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.development.order.calculate.CalcTax;
-import com.development.order.model.entities.enums.FreightRange;
 import com.development.order.model.entities.enums.PackageStatus;
 import com.development.order.services.exceptions.NotFoundResourceException;
 

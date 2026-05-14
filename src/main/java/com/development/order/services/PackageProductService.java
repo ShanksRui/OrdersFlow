@@ -42,7 +42,7 @@ public class PackageProductService {
 	public PackageProductDTO update(Long id,PackageProduct pkg) {
 		PackageProduct entity = findById(id);
 		dataUpdate(entity, pkg);
-		return new PackageProductDTO(entity);
+		return  PackageProductDTO.fromDTO(entity);
 	}
 	public void dataUpdate(PackageProduct entity,PackageProduct pkg) {
 		entity.setDataPrevist(pkg.getDataPrevist());

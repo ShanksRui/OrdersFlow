@@ -5,54 +5,21 @@ import java.time.Instant;
 import com.development.order.model.entities.ShippingStatusHistory;
 import com.development.order.model.entities.enums.ShippingStatus;
 
-public class ShippingStatusHistoryDTO {
+public record ShippingStatusHistoryDTO (
 
-	private Long id;
-	private ShippingStatus status;
-	private Instant dataTime;
-	private Long shippingID;
-	
-	public ShippingStatusHistoryDTO() {
-		
+	 Long id,
+	 ShippingStatus status,
+	 Instant dataTime,
+	 Long shippingID
+)
+{
+	public static ShippingStatusHistoryDTO fromDTO(ShippingStatusHistory status) {
+		return new ShippingStatusHistoryDTO(
+				status.getId(),
+				status.getStatus(),
+				status.getDataTime(),
+				status.getShipping().getId());
 	}
-	
-	public ShippingStatusHistoryDTO(ShippingStatusHistory ssh) {
-		this.id = ssh.getId();
-		this.status = ssh.getStatus();
-		this.dataTime = ssh.getDataTime();
-		this.shippingID = ssh.getShipping().getId();
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public ShippingStatus getStatus() {
-		return status;
-	}
-
-	public Instant getDataTime() {
-		return dataTime;
-	}
-
-	public Long getShippingID() {
-		return shippingID;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public void setStatus(ShippingStatus status) {
-		this.status = status;
-	}
-
-	public void setDataTime(Instant dataTime) {
-		this.dataTime = dataTime;
-	}
-
-	public void setShippingID(Long shippingID) {
-		this.shippingID = shippingID;
-	}
-	
 }
+
+	

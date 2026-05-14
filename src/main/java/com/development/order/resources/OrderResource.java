@@ -29,12 +29,12 @@ public class OrderResource {
 	@GetMapping
 	public ResponseEntity<List<OrderDTO>> findAll() {
 		List<OrderDTO> dtos = service.findAll()
-				.stream().map(OrderDTO::new).collect(Collectors.toList());
+				.stream().map(OrderDTO::fromDTO).collect(Collectors.toList());
 		return ResponseEntity.ok().body(dtos);
 	}
 	@GetMapping("/{id}")
 	public ResponseEntity<OrderDTO> findById(@PathVariable Long id) {
-		OrderDTO dto = new OrderDTO(service.findById(id));
+		OrderDTO dto =  OrderDTO.fromDTO(service.findById(id));
 		return ResponseEntity.ok().body(dto);
 	}
 

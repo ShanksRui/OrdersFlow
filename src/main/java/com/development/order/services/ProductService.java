@@ -24,9 +24,9 @@ public class ProductService {
 
 	public Product insert(ProductDTO product) {
 		Product p = new Product();
-		p.setName(product.getName());
-		p.setPrice(product.getPrice());
-		p.setType(product.getType());
+		p.setName(product.name());
+		p.setPrice(product.price());
+		p.setType(product.type());
 		for (int i = 0; i < 5; i++) {
 			String code = generatorFromCode();
 			p.setCode(code);
@@ -60,7 +60,7 @@ public class ProductService {
 		Product entity = findById(id);
 		dataUpdate(entity, product);
 		repository.save(entity);
-		return new ProductDTO(entity);
+		return ProductDTO.fromDTO(entity);
 	}
 
 	public void dataUpdate(Product entity, Product product) {

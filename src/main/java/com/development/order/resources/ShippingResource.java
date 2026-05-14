@@ -31,19 +31,19 @@ private ShippingService service;
 	@GetMapping
 	public ResponseEntity<List<ShippingDTO>> findAll() {
 		List<ShippingDTO> dtos = service.findAll()
-				.stream().map(ShippingDTO::new).collect(Collectors.toList());
+				.stream().map(ShippingDTO::fromDTO).collect(Collectors.toList());
 		return ResponseEntity.ok().body(dtos);
 	}
 	
 	@GetMapping("/history")
 	public ResponseEntity<List<ShippingStatusHistoryDTO>> findAllHistory(){
 		List<ShippingStatusHistoryDTO> dtos = service.findHistoryStatus()
-				.stream().map(ShippingStatusHistoryDTO::new).collect(Collectors.toList());
+				.stream().map(ShippingStatusHistoryDTO::fromDTO).collect(Collectors.toList());
 		return ResponseEntity.ok().body(dtos);
 	}
 	@GetMapping("/{id}")
 	public ResponseEntity<ShippingDTO> findById(@PathVariable Long id) {
-		ShippingDTO dto = new ShippingDTO(service.findById(id));
+		ShippingDTO dto =  ShippingDTO.fromDTO(service.findById(id));
 		return ResponseEntity.ok().body(dto);
 	}
 

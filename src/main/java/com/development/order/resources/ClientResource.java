@@ -36,18 +36,18 @@ public class ClientResource {
 		
 	  URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 			  .buildAndExpand(c.getId()).toUri();
-	  return ResponseEntity.created(uri).body(new ClientDTO(c));
+	  return ResponseEntity.created(uri).body(ClientDTO.fromDTO(c));
 	}
 
 	@GetMapping
 	public ResponseEntity<List<ClientDTO>> findall() {
-		List<ClientDTO> dtos = service.findAll().stream().map(ClientDTO::new).collect(Collectors.toList());
+		List<ClientDTO> dtos = service.findAll().stream().map(ClientDTO::fromDTO).collect(Collectors.toList());
 		return ResponseEntity.ok().body(dtos);
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<ClientDTO> findById(@PathVariable Long id) {
-		ClientDTO dto = new ClientDTO(service.findByID(id));
+		ClientDTO dto =  ClientDTO.fromDTO(service.findByID(id));
 		return ResponseEntity.ok().body(dto);
 	}
 

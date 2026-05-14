@@ -35,18 +35,18 @@ public class CenterResource {
 		Center c = service.insert(center);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(c.getId()).toUri();
-		return ResponseEntity.created(uri).body(new CenterDTO(c));
+		return ResponseEntity.created(uri).body(CenterDTO.fromDTO(c));
 	}
 
 	@GetMapping
 	public ResponseEntity<List<CenterDTO>> findAll() {
-		List<CenterDTO> dtos = service.findAll().stream().map(CenterDTO::new).collect(Collectors.toList());
+		List<CenterDTO> dtos = service.findAll().stream().map(CenterDTO::fromDTO).collect(Collectors.toList());
 		return ResponseEntity.ok().body(dtos);
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<CenterDTO> findById(@PathVariable Long id) {
-		CenterDTO dto = new CenterDTO(service.findById(id));
+		CenterDTO dto = CenterDTO.fromDTO(service.findById(id));
 		return ResponseEntity.ok().body(dto);
 	}
 

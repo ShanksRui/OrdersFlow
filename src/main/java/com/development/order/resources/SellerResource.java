@@ -35,18 +35,18 @@ public class SellerResource {
 		
 	  URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 			  .buildAndExpand(s.getId()).toUri();
-	  return ResponseEntity.created(uri).body(new SellerDTO(s));
+	  return ResponseEntity.created(uri).body(SellerDTO.fromDTO(s));
 	}
 	
 	@GetMapping
 	public ResponseEntity<List<SellerDTO>> findAll(){
 		List<SellerDTO> dtos = service.findAll()
-				.stream().map(SellerDTO::new).collect(Collectors.toList());
+				.stream().map(SellerDTO::fromDTO).collect(Collectors.toList());
 		return ResponseEntity.ok().body(dtos);
 	}
 	@GetMapping("/{id}")
 	public ResponseEntity<SellerDTO> findById(@PathVariable Long id) {
-		SellerDTO dto = new SellerDTO(service.findById(id));
+		SellerDTO dto =  SellerDTO.fromDTO(service.findById(id));
 		return ResponseEntity.ok().body(dto);
 	}
 

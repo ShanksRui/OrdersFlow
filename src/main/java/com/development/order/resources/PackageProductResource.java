@@ -30,12 +30,12 @@ public class PackageProductResource {
 	@GetMapping
 	public ResponseEntity<List<PackageProductDTO>> findAll() {
 		List<PackageProductDTO> dtos = service.findAll()
-				.stream().map(PackageProductDTO::new).collect(Collectors.toList());
+				.stream().map(PackageProductDTO::fromDTO).collect(Collectors.toList());
 		return ResponseEntity.ok().body(dtos);
 	}
 	@GetMapping("/{id}")
 	public ResponseEntity<PackageProductDTO> findById(@PathVariable Long id) {
-		PackageProductDTO dto = new PackageProductDTO(service.findById(id));
+		PackageProductDTO dto =  PackageProductDTO.fromDTO(service.findById(id));
 		return ResponseEntity.ok().body(dto);
 	}
 

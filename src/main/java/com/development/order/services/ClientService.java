@@ -21,13 +21,13 @@ public class ClientService {
 	}
 	
 	public Client insert(ClientRequestDTO client) {
-		if (repository.existsBycpf(client.getCpf())) {
+		if (repository.existsBycpf(client.cpf())) {
 			throw new IllegalArgumentException("already exitst ById in data Base");
 		}
 		Client c = new Client();
-		c.setName(client.getName());
-		c.setCpf(client.getCpf());
-		c.setLocality(client.getLocality());
+		c.setName(client.name());
+		c.setCpf(client.cpf());
+		c.setLocality(client.locality());
 		return repository.save(c);
 	    
 	}
@@ -52,7 +52,7 @@ public class ClientService {
 		Client entity = findByID(id);
 		dataUpdate(entity, client);
 		repository.save(entity);
-		return new ClientDTO(entity);
+		return ClientDTO.fromDTO(entity);
 
 	}
 

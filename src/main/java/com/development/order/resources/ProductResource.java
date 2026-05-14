@@ -35,18 +35,18 @@ public class ProductResource {
 		
 	  URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 			  .buildAndExpand(s.getId()).toUri();
-	  return ResponseEntity.created(uri).body(new ProductDTO(s));
+	  return ResponseEntity.created(uri).body(ProductDTO.fromDTO(s));
 	}
 	
 	@GetMapping
 	public ResponseEntity<List<ProductDTO>> findAll() {
 		List<ProductDTO> dtos = service.findAll()
-				.stream().map(ProductDTO::new).collect(Collectors.toList());
+				.stream().map(ProductDTO::fromDTO).collect(Collectors.toList());
 		return ResponseEntity.ok().body(dtos);
 	}
 	@GetMapping("/{id}")
 	public ResponseEntity<ProductDTO> findById(@PathVariable Long id) {
-		ProductDTO dto = new ProductDTO(service.findById(id));
+		ProductDTO dto =  ProductDTO.fromDTO(service.findById(id));
 		return ResponseEntity.ok().body(dto);
 	}
 

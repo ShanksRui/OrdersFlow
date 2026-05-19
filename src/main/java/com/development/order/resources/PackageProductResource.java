@@ -1,6 +1,7 @@
 package com.development.order.resources;
 
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,8 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.development.order.model.dto.request.PackageProductRequestDTO;
 import com.development.order.model.dto.response.PackageProductDTO;
+import com.development.order.model.dto.response.ProductDTO;
 import com.development.order.model.entities.PackageProduct;
 import com.development.order.services.PackageProductService;
 
@@ -26,6 +30,14 @@ public class PackageProductResource {
 	public PackageProductResource(PackageProductService service) {
 		this.service = service;
 	}
+	
+	public ResponseEntity<PackageProductDTO> insert(@RequestBody PackageProductRequestDTO dto) {
+		PackageProduct pkg = service.insert(dto);
+		
+		 URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				  .buildAndExpand(pkg.getId()).toUri();
+		  return ResponseEntity.created(uri).body(PackageProductDTO.fromDTO(pkg));
+		}
 	
 	@GetMapping
 	public ResponseEntity<List<PackageProductDTO>> findAll() {

@@ -10,6 +10,9 @@ public record ClientDTO (
 )	
 {
 	public static ClientDTO fromDTO(Client client) {
-		return new ClientDTO(client.getId(), client.getName(), client.getLocality());
+		return new ClientDTO(
+				client.getId(),
+				client.getName(),
+				client.getLocality());
 	}
 }

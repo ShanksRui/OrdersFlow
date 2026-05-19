@@ -11,7 +11,11 @@ public record InfoPackageDTO (
 	 Long order	
  ){
 	public static InfoPackageDTO fromIds(PackageProduct pkg) {
-		return new InfoPackageDTO(pkg.getSeller().getId(), pkg.getProduct().getId(), 
-				pkg.getCenter().getId(), pkg.getShipping().getId(), pkg.getOrder().getId());
+		return new InfoPackageDTO(
+				pkg.getSeller().getId(),
+				pkg.getProduct().getId(), 
+				pkg.getCenter().getId(),
+				pkg.getShipping().getId(),
+				pkg.getOrder().getId());
 	}
 }

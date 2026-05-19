@@ -1,4 +1,4 @@
-package com.development.order.calculate;
+package com.development.order.util;
 
 import com.development.order.model.dto.response.PackageProductDTO;
 import com.development.order.model.entities.enums.FreightRange;

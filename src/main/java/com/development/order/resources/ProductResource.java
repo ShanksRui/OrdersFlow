@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.development.order.model.dto.request.ProductRequestDTO;
 import com.development.order.model.dto.response.ProductDTO;
 import com.development.order.model.entities.Product;
 import com.development.order.services.ProductService;
@@ -30,7 +31,7 @@ public class ProductResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<ProductDTO> insert(@RequestBody ProductDTO product){
+	public ResponseEntity<ProductDTO> insert(@RequestBody ProductRequestDTO product){
 		Product s = service.insert(product);
 		
 	  URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")

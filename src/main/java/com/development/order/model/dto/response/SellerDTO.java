@@ -10,7 +10,10 @@ public record SellerDTO (
 )
 {
 	public static SellerDTO fromDTO(Seller seller) {
-		return new SellerDTO(seller.getId(), seller.getName(),seller.getCnpj());
+		return new SellerDTO(
+				seller.getId(),
+				seller.getName(),
+				seller.getCnpj());
 }
 }
 

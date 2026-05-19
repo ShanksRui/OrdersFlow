@@ -92,6 +92,15 @@ public class Product implements Serializable{
 	public void setSeller(Seller seller) {
 		this.seller = seller;
 	}
+	
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -108,14 +117,6 @@ public class Product implements Serializable{
 			return false;
 		Product other = (Product) obj;
 		return Objects.equals(id, other.id);
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
 	}
 
 }

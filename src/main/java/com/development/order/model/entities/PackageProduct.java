@@ -43,6 +43,8 @@ public class PackageProduct implements Serializable {
 	private Order order;
 	@OneToMany(mappedBy = "packageProduct", cascade = CascadeType.ALL)
 	private List<PackageStatusHistory> historys = new ArrayList<>();
+	private String trackingCode;
+	private String code;
 
 	private LocalDate dataPrevist;
 	private PackageStatus status;
@@ -64,7 +66,7 @@ public class PackageProduct implements Serializable {
 
 	public void addHistoryStatus(PackageStatusHistory psh) {
 		if (getStatus() == null) {
-			throw new IllegalStateException("shipping status must be defined before registering history");
+			throw new IllegalStateException("PackageProduct status must be defined before registering history");
 		}
 		psh.setStatus(status);
 		psh.setPackageProduct(this);
@@ -150,7 +152,22 @@ public class PackageProduct implements Serializable {
 		this.dataPrevist = dataPrevist;
 	}
 	
-  
+	public String getTrackingCode() {
+		return trackingCode;
+	}
+
+	public void setTrackingCode(String trackingCode) {
+		this.trackingCode = trackingCode;
+	}
+	
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -167,5 +184,4 @@ public class PackageProduct implements Serializable {
 		PackageProduct other = (PackageProduct) obj;
 		return Objects.equals(id, other.id);
 	}
-
 }

@@ -12,6 +12,7 @@ import com.development.order.model.entities.Order;
 import com.development.order.repositories.OrderRepository;
 import com.development.order.services.exceptions.CodeExistingException;
 import com.development.order.services.exceptions.NotFoundResourceException;
+import com.development.order.util.GeneratorCode;
 
 @Service
 public class OrderService {
@@ -29,13 +30,24 @@ public class OrderService {
 			order.setClient(service.findByID(dto.clientID()));
 			order.setMommentBuy(dto.mommentBuy());
 			for (int i = 0; i < 5; i++) {
-				String code = ProductService.generatorFromCode();
+				String code = GeneratorCode.generatorFromCode();
+				
+				if (code == null || code.isBlank()) {
+		            throw new IllegalStateException("generated code is null");
+		        }
+				
 				order.setCode(code);
-
+				
+			
 				try {
 					return repository.save(order);
 				} catch (DataIntegrityViolationException e) {
-					System.out.println("generating new code!");
+		            System.out.println(e.getMessage());
+		            
+		            if (!e.getMessage().contains("unique")) {
+		                throw e;
+		            }
+		            System.out.println("generating new code!");
 				}		
 			}
 			throw new CodeExistingException("error in generating for code unique");

@@ -5,6 +5,8 @@ public record ShippingRequestDTO (
 	 String name,
 	 String localdeparture,
 	 String localDestinity,
+	 Integer cnpj,
+	 Double priceFrete,
 	 Long centerID
 )
 {

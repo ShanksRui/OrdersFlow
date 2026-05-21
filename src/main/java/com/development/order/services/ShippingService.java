@@ -6,9 +6,12 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.development.order.model.dto.request.ShippingRequestDTO;
 import com.development.order.model.dto.response.ShippingDTO;
+import com.development.order.model.entities.Seller;
 import com.development.order.model.entities.Shipping;
 import com.development.order.model.entities.ShippingStatusHistory;
+import com.development.order.model.entities.enums.ShippingStatus;
 import com.development.order.repositories.ShippingRepository;
 import com.development.order.services.exceptions.NotFoundResourceException;
 
@@ -16,10 +19,25 @@ import com.development.order.services.exceptions.NotFoundResourceException;
 public class ShippingService {
 
 	private ShippingRepository repository;
+	private CenterService service;
 
-	public ShippingService(ShippingRepository repository) {
+	public ShippingService(ShippingRepository repository,CenterService serivce) {
 		this.repository = repository;
+		this.service = serivce;
 	}
+    public Shipping insert(ShippingRequestDTO dto) {
+    	if (repository.existsBycnpj(dto.cnpj())) {
+			throw new IllegalArgumentException("already exitst ById in data Base");
+		}
+		Shipping sh = new Shipping();
+		sh.setName(dto.name());
+		sh.setPrice(dto.priceFrete());
+		sh.setLocaldeparture(dto.localdeparture());
+		sh.setLocalDestinity(dto.localDestinity());
+		sh.setStatus(ShippingStatus.CREATED);
+		sh.setCenter(service.findById(dto.centerID()));
+		return repository.save(sh);
+    }
 
 	public List<Shipping> findAll() {
 		return repository.findAll();

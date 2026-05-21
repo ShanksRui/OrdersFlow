@@ -1,6 +1,7 @@
 package com.development.order.model.dto.response;
 
 import com.development.order.model.entities.Shipping;
+import com.development.order.model.entities.enums.ShippingStatus;
 
 public record ShippingDTO (
 
@@ -8,6 +9,8 @@ public record ShippingDTO (
 	 String name,
 	 String localdeparture,
 	 String localDestinity,
+	 Double priceFrete,
+	 ShippingStatus status,
 	 CenterDTO center
 )
 {
@@ -16,6 +19,8 @@ public record ShippingDTO (
 				shipping.getName(),
 				shipping.getLocaldeparture(),
 				shipping.getLocalDestinity(),
+				shipping.getPrice(),
+				shipping.getStatus(),
 				CenterDTO.fromDTO(shipping.getCenter()));
 	}
 }

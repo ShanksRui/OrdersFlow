@@ -53,7 +53,7 @@ public class Shipping implements Serializable {
 		this.localDestination = localDestination;
 		this.status = status;
 		this.center = center;
-		this.cnpj = cnpj;
+		this.setCnpj(cnpj);
 	}
 
 	public Center getCenter() {
@@ -134,6 +134,17 @@ public class Shipping implements Serializable {
 		history.setStatus(getStatus());
 		history.setShipping(this);
 		historys.add(history);
+	}
+	
+	public Integer getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(Integer cnpj) {
+		if(cnpj != null && cnpj <= 8) {
+			this.cnpj = cnpj;
+		}
+		throw new IllegalArgumentException("cnpj invalid");
 	}
 	
 

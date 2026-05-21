@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,14 +31,13 @@ public class PackageProductResource {
 	public PackageProductResource(PackageProductService service) {
 		this.service = service;
 	}
-	
+	@PostMapping
 	public ResponseEntity<PackageProductDTO> insert(@RequestBody PackageProductRequestDTO dto) {
 		PackageProduct pkg = service.insert(dto);
-		
-		 URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				 URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				  .buildAndExpand(pkg.getId()).toUri();
 		  return ResponseEntity.created(uri).body(PackageProductDTO.fromDTO(pkg));
-		}
+	}
 	
 	@GetMapping
 	public ResponseEntity<List<PackageProductDTO>> findAll() {

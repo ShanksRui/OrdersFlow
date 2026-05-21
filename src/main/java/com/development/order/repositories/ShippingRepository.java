@@ -6,5 +6,5 @@ import com.development.order.model.entities.Shipping;
 
 public interface ShippingRepository extends JpaRepository<Shipping, Long> {
 
-	boolean existsBycnpj(Integer cnpj);
+	boolean existsBycnpj(String cnpj);
 }

@@ -27,7 +27,7 @@ public class Shipping implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private Integer cnpj;
+	private String cnpj;
 	@OneToMany(mappedBy = "shipping")
 	private List<PackageProduct> pkgs = new ArrayList<>();
 	private String localdeparture;
@@ -45,7 +45,7 @@ public class Shipping implements Serializable {
 
 	}
 
-	public Shipping(Long id, String name,Integer cnpj, String localdeparture, String localDestination, ShippingStatus status,
+	public Shipping(Long id, String name,String cnpj, String localdeparture, String localDestination, ShippingStatus status,
 			Center center) {
 		this.id = id;
 		this.name = name;
@@ -136,17 +136,16 @@ public class Shipping implements Serializable {
 		historys.add(history);
 	}
 	
-	public Integer getCnpj() {
+	public String getCnpj() {
 		return cnpj;
 	}
 
-	public void setCnpj(Integer cnpj) {
-		if(cnpj != null && cnpj <= 8) {
-			this.cnpj = cnpj;
+	public void setCnpj(String cnpj) {
+		if(cnpj == null || cnpj.length() != 14) {
+			throw new IllegalArgumentException("cnpj invalid");
 		}
-		throw new IllegalArgumentException("cnpj invalid");
+		this.cnpj = cnpj;
 	}
-	
 
 	@Override
 	public int hashCode() {

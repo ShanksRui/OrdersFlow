@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.development.order.model.dto.request.ShippingRequestDTO;
 import com.development.order.model.dto.response.ShippingDTO;
-import com.development.order.model.entities.Seller;
 import com.development.order.model.entities.Shipping;
 import com.development.order.model.entities.ShippingStatusHistory;
 import com.development.order.model.entities.enums.ShippingStatus;
@@ -30,6 +29,7 @@ public class ShippingService {
 			throw new IllegalArgumentException("already exitst ById in data Base");
 		}
 		Shipping sh = new Shipping();
+		sh.setCnpj(dto.cnpj());
 		sh.setName(dto.name());
 		sh.setPrice(dto.priceFrete());
 		sh.setLocaldeparture(dto.localdeparture());

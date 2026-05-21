@@ -18,7 +18,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.development.order.model.dto.request.PackageProductRequestDTO;
 import com.development.order.model.dto.response.PackageProductDTO;
-import com.development.order.model.dto.response.ProductDTO;
 import com.development.order.model.entities.PackageProduct;
 import com.development.order.services.PackageProductService;
 

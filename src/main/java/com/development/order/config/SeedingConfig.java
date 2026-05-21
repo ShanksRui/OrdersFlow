@@ -77,7 +77,7 @@ public class SeedingConfig implements CommandLineRunner {
 		cRepository.saveAll(Arrays.asList(c1,c2));
 		
 		Center center1 = new Center(null,"Station",32124211,800);
-		Shipping ship = new Shipping(null, "Bags",44124214, "Brasilia","Sao-Paulo", ShippingStatus.CREATED,center1);
+		Shipping ship = new Shipping(null, "Bags","44124214324375", "Brasilia","Sao-Paulo", ShippingStatus.CREATED,center1);
 		ship.addHistoryStatus(new ShippingStatusHistory(null, Instant.now()));
 		ctRepository.save(center1);
 		shipRepository.save(ship);

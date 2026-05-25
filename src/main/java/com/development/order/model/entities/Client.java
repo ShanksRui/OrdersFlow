@@ -19,17 +19,17 @@ public class Client implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-	private Integer cpf;
+	private String cpf;
 	private Integer cep;
 	
 	public Client() {
 
 	}
 
-	public Client(Long id, String name, Integer cpf, Integer cep) {
+	public Client(Long id, String name, String cpf, Integer cep) {
 		this.id = id;
 		this.name = name;
-		this.cpf = cpf;
+		setCpf(cpf);
 		this.cep = cep;
 	}
 
@@ -41,7 +41,7 @@ public class Client implements Serializable {
 		return name;
 	}
 
-	public Integer getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
@@ -57,7 +57,10 @@ public class Client implements Serializable {
 		this.name = name;
 	}
 
-	public void setCpf(Integer cpf) {
+	public void setCpf(String cpf) {
+		if(cpf == null || cpf.length() >=9) {
+			throw new IllegalArgumentException("cpf invalid");
+		}
 		this.cpf = cpf;
 	}
 

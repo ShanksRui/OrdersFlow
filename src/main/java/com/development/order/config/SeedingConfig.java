@@ -72,8 +72,8 @@ public class SeedingConfig implements CommandLineRunner {
 		s1.getProducts().addAll(Arrays.asList(p2,p4));
 		s2.getProducts().addAll(Arrays.asList(p1,p3));
 		
-		Client c1 = new Client(null, "luiz", 245663276, 323239241);
-		Client c2 = new Client(null, "pamella", 625353242, 43532345);
+		Client c1 = new Client(null, "luiz", "24566327", 323239241);
+		Client c2 = new Client(null, "pamella", "62535324", 43532345);
 		cRepository.saveAll(Arrays.asList(c1,c2));
 		
 		Center center1 = new Center(null,"Station",32124211,800);
@@ -89,7 +89,10 @@ public class SeedingConfig implements CommandLineRunner {
 		ctRepository.save(center1);
 		pkg1.setShipping(ship);
 		pkg2.setShipping(ship);
-		
+		pkg1.setCode(GeneratorCode.generatorFromCode());
+		pkg2.setCode(GeneratorCode.generatorFromCode());
+		pkg1.setTrackingCode(GeneratorCode.generatorFromCode());
+		pkg2.setTrackingCode(GeneratorCode.generatorFromCode());
 		pkgRepository.saveAll(Arrays.asList(pkg1,pkg2));
 		ship.getPkgs().addAll(Arrays.asList(pkg1,pkg2));
 		shipRepository.save(ship);

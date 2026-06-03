@@ -10,9 +10,11 @@ import com.development.order.model.dto.request.PackageProductRequestDTO;
 import com.development.order.model.dto.response.PackageProductDTO;
 import com.development.order.model.entities.PackageProduct;
 import com.development.order.model.entities.enums.PackageStatus;
+import com.development.order.payments.FactoryPayments;
 import com.development.order.repositories.PackageProductRepository;
 import com.development.order.services.exceptions.CodeExistingException;
 import com.development.order.services.exceptions.NotFoundResourceException;
+import com.development.order.util.CalcTax;
 import com.development.order.util.GeneratorCode;
 
 @Service
@@ -42,8 +44,11 @@ public class PackageProductService {
 		pkg.setStatus(PackageStatus.TRACKING_GENERATED);
 		pkg.setOrder(oService.findById(dto.info().order()));
 		pkg.setProduct(pService.findById(dto.info().product()));
-		pkg.setCenter(cService.findById(dto.info().center()));
 		pkg.setShipping(sService.findById(dto.info().shipping()));
+		CalcTax calc = FactoryPayments.PaymentMethod(pkg.getOrder().getMethodPayment());	
+		pkg.setTotalFrete(CalcTax.valueTotal(pkg));
+		pkg.setValueTotal(calc.calc(pkg));
+		pkg.setCenter(cService.findById(dto.info().center()));
 		pkg.setSeller(pkg.getProduct());
 		
 		for (int i = 0; i < 5; i++) {

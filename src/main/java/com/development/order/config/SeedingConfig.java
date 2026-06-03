@@ -2,7 +2,9 @@ package com.development.order.config;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -20,6 +22,7 @@ import com.development.order.model.entities.Shipping;
 import com.development.order.model.entities.ShippingStatusHistory;
 import com.development.order.model.entities.enums.PackageStatus;
 import com.development.order.model.entities.enums.ShippingStatus;
+import com.development.order.payments.FactoryPayments;
 import com.development.order.repositories.CenterRepository;
 import com.development.order.repositories.ClientRepository;
 import com.development.order.repositories.OrderRepository;
@@ -29,6 +32,7 @@ import com.development.order.repositories.SellerRepository;
 import com.development.order.repositories.ShippingRepository;
 import com.development.order.services.OrderService;
 import com.development.order.services.ProductService;
+import com.development.order.util.CalcTax;
 import com.development.order.util.GeneratorCode;
 
 @Configuration
@@ -93,16 +97,25 @@ public class SeedingConfig implements CommandLineRunner {
 		pkg2.setCode(GeneratorCode.generatorFromCode());
 		pkg1.setTrackingCode(GeneratorCode.generatorFromCode());
 		pkg2.setTrackingCode(GeneratorCode.generatorFromCode());
+		pkg1.setTotalFrete(CalcTax.valueTotal(pkg1));
+		pkg2.setTotalFrete(CalcTax.valueTotal(pkg2));
+		List<PackageProduct> list = new ArrayList<>();
+		list.addAll(Arrays.asList(pkg1,pkg2));
+		
 		pkgRepository.saveAll(Arrays.asList(pkg1,pkg2));
 		ship.getPkgs().addAll(Arrays.asList(pkg1,pkg2));
 		shipRepository.save(ship);
 		
-		Order o1 = new Order(null,c2);
-		Order o2 = new Order(null,c1);
+		Order o1 = new Order(null,c2,"pix");
+		Order o2 = new Order(null,c1,"card");
 		o1.setCode(GeneratorCode.generatorFromCode());
 		o2.setCode(GeneratorCode.generatorFromCode());
 		o1.addPackage(pkg2);
 		o2.addPackage(pkg1);
+		for(PackageProduct p : list) {
+			CalcTax calc = FactoryPayments.PaymentMethod(p.getOrder().getMethodPayment());
+            p.setValueTotal(calc.calc(p));
+		}
 		oRepository.saveAll(Arrays.asList(o1,o2));
 		pkgRepository.saveAll(Arrays.asList(pkg1,pkg2));
 

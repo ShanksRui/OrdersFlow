@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import com.development.order.model.dto.request.OrderRequestDTO;
 import com.development.order.model.dto.response.OrderDTO;
 import com.development.order.model.entities.Order;
+import com.development.order.payments.FactoryPayments;
 import com.development.order.repositories.OrderRepository;
 import com.development.order.services.exceptions.CodeExistingException;
 import com.development.order.services.exceptions.NotFoundResourceException;
+import com.development.order.util.CalcTax;
 import com.development.order.util.GeneratorCode;
 
 @Service
@@ -29,6 +31,7 @@ public class OrderService {
 			Order order = new Order();
 			order.setClient(service.findByID(dto.clientID()));
 			order.setMommentBuy(dto.mommentBuy());
+			order.setMethodPayment(dto.methodPayment());
 			for (int i = 0; i < 5; i++) {
 				String code = GeneratorCode.generatorFromCode();
 				

@@ -27,7 +27,7 @@ public class Order implements Serializable {
 	@Column(unique = true, nullable = false)
 	private String code;
 	private Instant mommentBuy;
-
+    private String methodPayment;
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private Client client;
@@ -38,9 +38,10 @@ public class Order implements Serializable {
 
 	}
 
-	public Order(Long id, Client client) {
+	public Order(Long id, Client client,String methodPayment) {
 		this.id = id;
 		this.client = client;
+		this.methodPayment = methodPayment;
 
 	}
 
@@ -85,7 +86,15 @@ public class Order implements Serializable {
 	public void setCode(String code) {
 		this.code = code;
 	}
+	
+	public String getMethodPayment() {
+		return methodPayment;
+	}
 
+	public void setMethodPayment(String methodPayment) {
+		this.methodPayment = methodPayment;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -102,5 +111,4 @@ public class Order implements Serializable {
 		Order other = (Order) obj;
 		return Objects.equals(id, other.id);
 	}
-
 }

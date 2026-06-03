@@ -9,6 +9,7 @@ public record OrderDTO (
 		 Long id,
 		 Instant mommentBuy,
 		 String code,
+		 String methodPayment,
 		 ClientDTO client
 		
 	)	
@@ -18,6 +19,7 @@ public record OrderDTO (
 					order.getId(), 
 					order.getMommentBuy(),
 					order.getCode(),
+					order.getMethodPayment(),
 					ClientDTO.fromDTO(order.getClient()));
 					
 

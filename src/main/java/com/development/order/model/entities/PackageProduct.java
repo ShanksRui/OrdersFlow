@@ -1,10 +1,13 @@
 package com.development.order.model.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import org.springframework.format.annotation.NumberFormat;
 
 import com.development.order.model.entities.enums.PackageStatus;
 import com.development.order.services.exceptions.NotFoundResourceException;
@@ -47,6 +50,11 @@ public class PackageProduct implements Serializable {
 	private List<PackageStatusHistory> historys = new ArrayList<>();
 	private String trackingCode;
 	private String code;
+
+	@NumberFormat(pattern = "#,##0.00")
+	private BigDecimal valueTotal;
+	@NumberFormat(pattern = "#,##0.00")
+	private BigDecimal totalFrete;
 
 	private LocalDate dataPrevist;
 	@Enumerated(EnumType.STRING)
@@ -107,7 +115,7 @@ public class PackageProduct implements Serializable {
 	public Double getWeightDeclared() {
 		return weightDeclared;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -154,7 +162,7 @@ public class PackageProduct implements Serializable {
 	public void setDataPrevist(LocalDate dataPrevist) {
 		this.dataPrevist = dataPrevist;
 	}
-	
+
 	public String getTrackingCode() {
 		return trackingCode;
 	}
@@ -162,7 +170,7 @@ public class PackageProduct implements Serializable {
 	public void setTrackingCode(String trackingCode) {
 		this.trackingCode = trackingCode;
 	}
-	
+
 	public String getCode() {
 		return code;
 	}
@@ -170,10 +178,26 @@ public class PackageProduct implements Serializable {
 	public void setCode(String code) {
 		this.code = code;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
+	}
+
+	public BigDecimal getValueTotal() {
+		return valueTotal;
+	}
+
+	public void setValueTotal(BigDecimal valueTotal) {
+		this.valueTotal = valueTotal;
+	}
+
+	public BigDecimal getTotalFrete() {
+		return totalFrete;
+	}
+
+	public void setTotalFrete(BigDecimal totalFrete) {
+		this.totalFrete = totalFrete;
 	}
 
 	@Override
@@ -187,4 +211,5 @@ public class PackageProduct implements Serializable {
 		PackageProduct other = (PackageProduct) obj;
 		return Objects.equals(id, other.id);
 	}
+
 }

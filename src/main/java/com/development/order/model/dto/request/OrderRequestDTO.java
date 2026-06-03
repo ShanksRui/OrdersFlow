@@ -5,6 +5,7 @@ import java.time.Instant;
 public record OrderRequestDTO (
 
 	 Instant mommentBuy,
+	 String methodPayment,
 	 Long clientID,
 	 Long pkgID
 )

@@ -1,6 +1,7 @@
 package com.development.order.model.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -26,7 +27,8 @@ public class Product implements Serializable{
 	private String name;
 	@Column(unique = true,nullable = false)
 	private String code;
-	private Double price;
+	@Column(precision = 10, scale = 2)
+	private BigDecimal price;
 	private String type;
 	@ManyToOne
 	@JoinColumn(name = "seller_ID")
@@ -40,7 +42,7 @@ public class Product implements Serializable{
 		
 	}
 	
-	public Product(Long id,String name, Double price, String type, Seller seller) {
+	public Product(Long id,String name, BigDecimal price, String type, Seller seller) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
@@ -65,7 +67,7 @@ public class Product implements Serializable{
 		return name;
 	}
 
-	public Double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
@@ -81,7 +83,7 @@ public class Product implements Serializable{
 		this.name = name;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 

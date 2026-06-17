@@ -1,5 +1,6 @@
 package com.development.order.config;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -30,8 +31,6 @@ import com.development.order.repositories.PackageProductRepository;
 import com.development.order.repositories.ProductRepository;
 import com.development.order.repositories.SellerRepository;
 import com.development.order.repositories.ShippingRepository;
-import com.development.order.services.OrderService;
-import com.development.order.services.ProductService;
 import com.development.order.util.CalcTax;
 import com.development.order.util.GeneratorCode;
 
@@ -64,10 +63,10 @@ public class SeedingConfig implements CommandLineRunner {
 		Seller s2 = new Seller(null, "Hernadez", 421515324);
 		sRepository.saveAll(Arrays.asList(s1,s2));
 		
-		Product p1 = new Product(null, "Notebook Gamer RTX 4060", 5899.90, "Eletronics", s2);		
-		Product p2 = new Product(null, "Monitor 27\" 144Hz", 1299.00, "Eletronics", s1);
-		Product p3 = new Product(null, "Webcam Full HD", 219.90, "accessories", s2);
-		Product p4 = new Product(null, "Mesa 4x4", 219.90, "accessories", s1);
+		Product p1 = new Product(null, "Notebook Gamer RTX 4060", new BigDecimal(5899.90), "Eletronics", s2);		
+		Product p2 = new Product(null, "Monitor 27\" 144Hz", new BigDecimal(1299.00), "Eletronics", s1);
+		Product p3 = new Product(null, "Webcam Full HD", new BigDecimal(219.90), "accessories", s2);
+		Product p4 = new Product(null, "Mesa 4x4", new BigDecimal(219.90), "accessories", s1);
 		p1.setCode(GeneratorCode.generatorFromCode());
 		p2.setCode(GeneratorCode.generatorFromCode());
 		p3.setCode(GeneratorCode.generatorFromCode());
@@ -86,7 +85,7 @@ public class SeedingConfig implements CommandLineRunner {
 		ctRepository.save(center1);
 		shipRepository.save(ship);
 		PackageProduct pkg1 = new PackageProduct(null,6.4,LocalDate.of(2026, 10, 12),p4,center1, PackageStatus.CREATED_BY_SELLER);
-		PackageProduct pkg2 = new PackageProduct(null,24.0,LocalDate.of(2026, 9, 03),p1,center1, PackageStatus.CREATED_BY_SELLER);
+		PackageProduct pkg2 = new PackageProduct(null,9.0,LocalDate.of(2026, 9, 03),p1,center1, PackageStatus.CREATED_BY_SELLER);
 		pkg1.addHistoryStatus(new PackageStatusHistory(null, Instant.now()));
 		center1.getPkgs().addAll(Arrays.asList(pkg1,pkg2));
 		center1.setQuantityPackages();

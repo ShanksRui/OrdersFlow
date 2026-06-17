@@ -1,5 +1,6 @@
 package com.development.order.services;
 
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +29,7 @@ public class ProductService {
 	public Product insert(ProductRequestDTO product) {
 		Product p = new Product();
 		p.setName(product.name());
-		p.setPrice(product.price());
+		p.setPrice(product.price().setScale(2,RoundingMode.HALF_UP));
 		p.setType(product.type());
 		p.setSeller(service.findById(product.sellerID()));
 		for (int i = 0; i < 5; i++) {

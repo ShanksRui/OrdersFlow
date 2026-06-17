@@ -1,5 +1,6 @@
 package com.development.order.services;
 
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,7 +32,7 @@ public class ShippingService {
 		Shipping sh = new Shipping();
 		sh.setCnpj(dto.cnpj());
 		sh.setName(dto.name());
-		sh.setPrice(dto.priceFrete());
+		sh.setPrice(dto.priceFrete().setScale(2,RoundingMode.HALF_UP));
 		sh.setLocaldeparture(dto.localdeparture());
 		sh.setLocalDestinity(dto.localDestinity());
 		sh.setStatus(ShippingStatus.CREATED);

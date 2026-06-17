@@ -1,5 +1,7 @@
 package com.development.order.model.dto.response;
 
+import java.math.BigDecimal;
+
 import com.development.order.model.entities.Shipping;
 import com.development.order.model.entities.enums.ShippingStatus;
 
@@ -9,7 +11,7 @@ public record ShippingDTO (
 	 String name,
 	 String localdeparture,
 	 String localDestinity,
-	 Double priceFrete,
+	 BigDecimal priceFrete,
 	 ShippingStatus status,
 	 CenterDTO center
 )

@@ -9,10 +9,10 @@ public interface CalcTax {
 	
 	    static BigDecimal valueTotal (PackageProduct packageProduct) {
 	    FreightRange f	= FreightRange.calculate(packageProduct.getWeightDeclared());
-		Double price = f.getPrice();
-		Double tax = f.getTax();
-		Double priceFrete = packageProduct.getShipping().getPrice();
-		return price += (price * tax + priceFrete);	
+		BigDecimal price = BigDecimal.valueOf(f.getPrice());
+		BigDecimal tax = BigDecimal.valueOf(f.getTax());
+		BigDecimal priceFrete = packageProduct.getShipping().getPrice();
+		return price.add(price.multiply(tax).add(priceFrete));
 	}
-	    Double calc(PackageProduct pkg);
+	    BigDecimal calc(PackageProduct pkg);
 }

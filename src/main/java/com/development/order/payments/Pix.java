@@ -1,21 +1,24 @@
 package com.development.order.payments;
 
+import java.math.BigDecimal;
+
 import com.development.order.model.entities.PackageProduct;
 import com.development.order.util.CalcTax;
 
 public class Pix implements CalcTax{
 	
-	private final Double tax;
+	private final BigDecimal tax;
 	
 	public Pix(Double tax) {
-		this.tax = tax;
+		this.tax = BigDecimal.valueOf(tax);
 	}
 
 	@Override
-	public Double calc(PackageProduct pkg) {
-		Double value  = CalcTax.valueTotal(pkg);
-		Double result = value * tax;
-		return pkg.getProduct().getPrice() + (value - result);
+	public BigDecimal calc(PackageProduct pkg) {
+		BigDecimal value  = CalcTax.valueTotal(pkg);
+		BigDecimal result = value.multiply(tax);
+		BigDecimal price = pkg.getProduct().getPrice();
+		return price.add(value.subtract(result));
 	}
 
 	

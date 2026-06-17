@@ -7,12 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import org.springframework.format.annotation.NumberFormat;
-
 import com.development.order.model.entities.enums.PackageStatus;
 import com.development.order.services.exceptions.NotFoundResourceException;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -51,9 +50,9 @@ public class PackageProduct implements Serializable {
 	private String trackingCode;
 	private String code;
 
-	@NumberFormat(pattern = "#,##0.00")
+	@Column(precision = 10, scale = 2)
 	private BigDecimal valueTotal;
-	@NumberFormat(pattern = "#,##0.00")
+	@Column(precision = 10, scale = 2)
 	private BigDecimal totalFrete;
 
 	private LocalDate dataPrevist;

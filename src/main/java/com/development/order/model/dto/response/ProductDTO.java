@@ -1,5 +1,7 @@
 package com.development.order.model.dto.response;
 
+import java.math.BigDecimal;
+
 import com.development.order.model.entities.Product;
 
 public record ProductDTO (
@@ -7,7 +9,7 @@ public record ProductDTO (
 	 Long id,
      String code,
 	 String name,
-	 Double price,
+	 BigDecimal price,
 	 String type,
 	 SellerDTO seller
 )

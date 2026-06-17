@@ -1,6 +1,7 @@
 package com.development.order.model.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -8,6 +9,7 @@ import java.util.Objects;
 import com.development.order.model.entities.enums.ShippingStatus;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -39,7 +41,8 @@ public class Shipping implements Serializable {
 	private Center center;
 	@OneToMany(mappedBy = "shipping", cascade = CascadeType.ALL)
 	private List<ShippingStatusHistory> historys = new ArrayList<>();
-	private Double price = 19.00;
+	@Column(precision = 10, scale = 2)
+	private BigDecimal price = BigDecimal.valueOf(19.00);
 
 	public Shipping() {
 
@@ -119,11 +122,11 @@ public class Shipping implements Serializable {
 		return historys;
 	}
 
-	public Double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(Double price) {
+	public void setPrice(BigDecimal price) {
 	      this.price = price;
 	}
 

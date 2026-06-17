@@ -1,5 +1,6 @@
 package com.development.order.services;
 
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,8 +47,8 @@ public class PackageProductService {
 		pkg.setProduct(pService.findById(dto.info().product()));
 		pkg.setShipping(sService.findById(dto.info().shipping()));
 		CalcTax calc = FactoryPayments.PaymentMethod(pkg.getOrder().getMethodPayment());	
-		pkg.setTotalFrete(CalcTax.valueTotal(pkg));
-		pkg.setValueTotal(calc.calc(pkg));
+		pkg.setTotalFrete(CalcTax.valueTotal(pkg).setScale(2,RoundingMode.HALF_UP));
+		pkg.setValueTotal(calc.calc(pkg).setScale(2,RoundingMode.HALF_UP));
 		pkg.setCenter(cService.findById(dto.info().center()));
 		pkg.setSeller(pkg.getProduct());
 		
